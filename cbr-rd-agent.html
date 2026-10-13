@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CBR-augmented R&amp;D-Agent · Felix Stocker</title>
+<meta name="description" content="CBR-augmented R&amp;D-Agent: an early-stage data science agent with a memory of past experiments. A private project by Felix Stocker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <a class="back" href="index.html#open-source">← Skill profile</a>
+    <div class="kinds"><span class="kind os">Private project</span><span class="kind">Open source · MIT</span><span class="kind warn">Early-stage prototype</span></div>
+    <h1 class="page-title">CBR-augmented R&amp;D-Agent</h1>
+    <p class="lede">An autonomous data science agent that keeps a memory of past experiments and reuses what worked.</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/stofe94/cbr-rd-agent" target="_blank" rel="noopener">View on GitHub ↗</a>
+      <a class="btn ghost" href="https://arxiv.org/abs/2606.05250" target="_blank" rel="noopener">Preprint on arXiv ↗</a>
+    </div>
+    <figure class="page-fig">
+      <svg class="cbr-svg" data-viz="cbr" viewBox="0 0 640 420" role="img" aria-label="Schematic of the case-based reasoning loop: the agent retrieves similar cases from its case memory, reuses and adapts them, revises the result with an evaluation and quality gate, and retains good results as new cases.">
+        <defs>
+          <marker id="cbr-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <text class="cbr-count" x="616" y="24" text-anchor="end">experiment 1 · 4 cases</text>
+
+        <text class="cbr-in" x="24" y="96">New task</text>
+        <line class="cbr-arc" x1="112" y1="90" x2="302" y2="90" marker-end="url(#cbr-arrow)"/>
+
+        <path class="cbr-arc" d="M351.4 93.9 A130 130 0 0 1 446.1 188.6" marker-end="url(#cbr-arrow)"/>
+        <path class="cbr-arc" d="M446.1 251.4 A130 130 0 0 1 351.4 346.1" marker-end="url(#cbr-arrow)"/>
+        <path class="cbr-arc" d="M288.6 346.1 A130 130 0 0 1 193.9 251.4" marker-end="url(#cbr-arrow)"/>
+        <path class="cbr-arc" d="M193.9 188.6 A130 130 0 0 1 288.6 93.9" marker-end="url(#cbr-arrow)"/>
+
+        <circle class="cbr-mem" cx="320" cy="220" r="62"/>
+        <g class="cbr-cases"></g>
+        <text class="cbr-memlab" x="320" y="264" text-anchor="middle">case memory</text>
+
+        <line class="cbr-link" data-link="retrieve" x1="320" y1="156" x2="320" y2="104" marker-end="url(#cbr-arrow)"/>
+        <text class="cbr-linklab" x="330" y="136">read</text>
+        <line class="cbr-link" data-link="retain" x1="200" y1="220" x2="252" y2="220" marker-end="url(#cbr-arrow)"/>
+        <text class="cbr-linklab" x="226" y="208" text-anchor="middle">write</text>
+
+        <g class="cbr-st" data-st="retrieve">
+          <circle class="cbr-node" cx="320" cy="90" r="8"/>
+          <text class="cbr-lab" x="320" y="46" text-anchor="middle">Retrieve</text>
+          <text class="cbr-sub" x="320" y="68" text-anchor="middle">similar past cases</text>
+        </g>
+        <g class="cbr-st" data-st="reuse">
+          <circle class="cbr-node" cx="450" cy="220" r="8"/>
+          <text class="cbr-lab" x="468" y="214">Reuse</text>
+          <text class="cbr-sub" x="468" y="236">adapt their code</text>
+        </g>
+        <g class="cbr-st" data-st="revise">
+          <circle class="cbr-node" cx="320" cy="350" r="8"/>
+          <text class="cbr-lab" x="320" y="384" text-anchor="middle">Revise</text>
+          <text class="cbr-sub" x="320" y="406" text-anchor="middle">evaluate + quality gate</text>
+        </g>
+        <g class="cbr-st" data-st="retain">
+          <circle class="cbr-node" cx="190" cy="220" r="8"/>
+          <text class="cbr-lab" x="172" y="214" text-anchor="end">Retain</text>
+          <text class="cbr-sub" x="172" y="236" text-anchor="end">store as a new case</text>
+        </g>
+
+        <circle class="cbr-token" cx="320" cy="90" r="9"/>
+      </svg>
+      <figcaption>Schematic of the case-based reasoning loop. For each new task the agent looks up similar past experiments, adapts them, checks the result, and stores good solutions as new cases. Results that fail the quality gate are not stored.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <div class="doc-main">
+
+    <div class="status">
+      <span class="lbl">Current status</span>
+      <p>A first research approach, still far from practical use. It was built to complete a project assignment, including a preprint, and has only been tested on two Kaggle competitions. This page describes what exists today and where its limits are.</p>
+    </div>
+
+    <section>
+      <h2>Where the idea came from</h2>
+      <p>The idea goes back to discussions at IDIADA when agent systems were first appearing in industry. For a small team, as in many small and medium-sized companies, the open question was whether such agents are usable at all and what it would take.</p>
+      <p>Two things got the project started. A further-education certificate in applied AI at Technische Hochschule Ingolstadt required a project with a publishable paper, and I chose this topic. At the same time, I see it as a long-term development project that this assignment kicked off.</p>
+    </section>
+
+    <section>
+      <h2>The long-term goal</h2>
+      <p>An autonomous data science agent that draws on the experience and past projects of a company team. It would solve new data science tasks on its own and store new solutions back into a shared database. Over time it would build up a set of solutions that fit the team's own work and can be reused.</p>
+    </section>
+
+    <section>
+      <h2>What exists today</h2>
+      <p>The project extends Microsoft's open-source <a href="https://github.com/microsoft/RD-Agent" target="_blank" rel="noopener">R&amp;D-Agent</a>, which uses a language model to propose, implement and evaluate data science experiments.</p>
+      <ul>
+        <li><strong>Experiment memory.</strong> Successful experiments are stored as cases and retrieved when a similar task comes up. Failed attempts are remembered too, so they are not repeated.</li>
+        <li><strong>Quality check before storing.</strong> Only results that run cleanly, improve on the starting point and add something new are kept.</li>
+        <li><strong>Small, locally deployable model.</strong> The agent runs on Gemma 4, an open model that can run on a company's own hardware.</li>
+        <li><strong>Comparison with and without memory</strong> on two Kaggle competitions, with statistical tests.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>First results and limits</h2>
+      <p>The first experiments point in a direction, but with only a few runs per setup they are not yet statistically robust. Setup, figures and a detailed discussion are in the <a href="https://arxiv.org/abs/2606.05250" target="_blank" rel="noopener">preprint</a>.</p>
+      <ul>
+        <li>Tested on two Kaggle competitions only. The method has not been generalized to other tasks.</li>
+        <li>Few runs per setup, so all effects are preliminary.</li>
+        <li>The memory has only been used within one task so far. Reuse across tasks, the actual long-term goal, is not tested yet.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next steps</h2>
+      <p>I plan to continue the project in further certificate courses: improve the method and the preprint, then use improved versions to produce results that hold up at scientific conferences, which I want to publish as an independent researcher.</p>
+    </section>
+
+  </div>
+
+  <aside class="aside" aria-label="Project facts">
+    <dl>
+      <div><dt>Type</dt><dd>Private project, open source</dd></div>
+      <div><dt>Context</dt><dd>Further-education certificate in applied AI (THI)</dd></div>
+      <div><dt>Status</dt><dd>Early-stage research prototype</dd></div>
+      <div><dt>Preprint</dt><dd><a href="https://arxiv.org/abs/2606.05250" target="_blank" rel="noopener">arXiv:2606.05250</a> (2026), not peer-reviewed</dd></div>
+      <div><dt>Builds on</dt><dd>Microsoft R&amp;D-Agent (MIT)</dd></div>
+      <div><dt>Stack</dt><dd>Python, Docker, Gemma 4</dd></div>
+    </dl>
+    <div class="links">
+      <a href="https://github.com/stofe94/cbr-rd-agent" target="_blank" rel="noopener">github.com/stofe94/cbr-rd-agent ↗</a>
+    </div>
+  </aside>
+</main>
+
+<div class="more">
+  <div class="wrap">
+    <span class="lbl">More open-source projects</span>
+    <a class="btn ghost" href="crashdefnet.html">CrashDefNet →</a>
+    <a class="btn ghost" href="artico.html">arTIco →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Germany</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Skill profile · updated October 2026</div>
+  </div>
+</footer>
+
+<script src="viz.js"></script>
+</body>
+</html>

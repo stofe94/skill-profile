@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CrashDefNet · Felix Stocker</title>
+<meta name="description" content="CrashDefNet: learned deformation prediction for crash simulations. A private open-source project by Felix Stocker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <a class="back" href="index.html#open-source">← Skill profile</a>
+    <div class="kinds"><span class="kind os">Private project</span><span class="kind">Open source · Apache-2.0</span><span class="kind">v0.2.0 · 2026</span></div>
+    <h1 class="page-title">CrashDefNet</h1>
+    <p class="lede">Learned deformation prediction for crash simulations. A lean PyTorch workflow from simulation data to predictions, built so that new model architectures can be tried out quickly.</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">View on GitHub ↗</a>
+    </div>
+    <figure class="page-fig">
+      <canvas class="viz viz-plate" data-viz="plate" role="img" aria-label="Schematic: a plate mesh drawn as a graph is pressed by an impactor and deforms step by step, colored by strain"></canvas>
+      <figcaption>Schematic of a rollout: from the current state of the mesh, the model predicts the next one, step by step. Colour indicates strain. An illustration, not a model result.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <div class="doc-main">
+
+    <section>
+      <h2>What it does</h2>
+      <p>CrashDefNet (Crash Deformation Network) learns from finite element simulations. It treats the simulation mesh as a graph and predicts, one time step after another, how the mesh deforms and which stress it carries. Chaining these steps reproduces the deformation of a whole part.</p>
+      <p>Learned models like this aim to give engineers deformation results much faster than a full crash simulation. CrashDefNet provides the workflow around such models and keeps it small and readable, so different architectures can be compared under the same conditions.</p>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <ol class="flow">
+        <li><span class="flow-n">1</span><b>Simulation data</b>FE results exported to a dataset</li>
+        <li><span class="flow-n">2</span><b>Mesh as graph</b>nodes, element edges and contact</li>
+        <li class="hl"><span class="flow-n">3</span><b>Graph network</b>predicts the next time step</li>
+        <li><span class="flow-n">4</span><b>Rollout</b>step 3 repeated over time</li>
+        <li><span class="flow-n">5</span><b>Evaluation</b>metrics, reports, ParaView</li>
+      </ol>
+      <p class="flow-note">A new architecture replaces step 3. Everything else stays the same, which keeps comparisons fair.</p>
+    </section>
+
+    <section>
+      <h2>Background</h2>
+      <p>CrashDefNet builds on the experience I gained working on deep learning for crash simulation, a topic I worked on intensively at IDIADA.</p>
+      <p>About a year ago I started CrashDefNet as a private project and built it from scratch: a lean tool of my own for trying out ideas and running small tests quickly and flexibly. It has grown steadily since. Today its main purpose is to test new model architectures soon after they are published, and to make this simple, flexible base available to others.</p>
+    </section>
+
+    <section>
+      <h2>What's included</h2>
+      <ul>
+        <li><strong>Two graph network architectures</strong> in one pipeline: MeshGraphNet and the recent MeshGraphNet-Transformer.</li>
+        <li><strong>Easy to extend.</strong> A new architecture needs little code; data, training and evaluation stay unchanged.</li>
+        <li><strong>Fair comparison.</strong> Every model uses the same data, training loop and metrics.</li>
+        <li><strong>Traceable results</strong> that can be viewed in ParaView.</li>
+        <li><strong>From laptop to GPU.</strong> Quick tests run on a CPU, larger runs on a GPU via Docker.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Status</h2>
+      <p>Version 0.2.0 is the first public release. It is developed on DeepMind's public deforming_plate dataset, a simplified crash case with contact and large deformation. First training runs show that the whole chain works end to end. The results so far are preliminary; setup, figures and their limits are documented in the <a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">repository</a>.</p>
+    </section>
+
+    <section>
+      <h2>Next steps</h2>
+      <ul>
+        <li>Add and test further recent architectures as they are published.</li>
+        <li>More complex crash scenarios with dynamic impact and plasticity.</li>
+        <li>Work directly with data exported from CAE solvers.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <ul class="refs">
+        <li>T. Pfaff, M. Fortunato, A. Sanchez-Gonzalez, P. W. Battaglia. Learning Mesh-Based Simulation with Graph Networks. ICLR 2021. <a href="https://arxiv.org/abs/2010.03409" target="_blank" rel="noopener">arXiv:2010.03409</a></li>
+        <li>M. M. Iparraguirre, I. Alfaro, D. González, E. Cueto. MeshGraphNet-Transformer: Scalable Mesh-Based Learned Simulation for Solid Mechanics. 2026. <a href="https://arxiv.org/abs/2601.23177" target="_blank" rel="noopener">arXiv:2601.23177</a></li>
+      </ul>
+    </section>
+
+  </div>
+
+  <aside class="aside" aria-label="Project facts">
+    <dl>
+      <div><dt>Type</dt><dd>Private project, open source</dd></div>
+      <div><dt>Role</dt><dd>Sole developer</dd></div>
+      <div><dt>Status</dt><dd>v0.2.0, first public release (2026)</dd></div>
+      <div><dt>License</dt><dd>Apache 2.0</dd></div>
+      <div><dt>Stack</dt><dd>Python, PyTorch, PyTorch Geometric, Docker, ParaView</dd></div>
+    </dl>
+    <div class="links">
+      <a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">github.com/stofe94/crash-def-net ↗</a>
+    </div>
+  </aside>
+</main>
+
+<div class="more">
+  <div class="wrap">
+    <span class="lbl">More open-source projects</span>
+    <a class="btn ghost" href="artico.html">arTIco →</a>
+    <a class="btn ghost" href="cbr-rd-agent.html">CBR-augmented R&amp;D-Agent →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Germany</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Skill profile · updated October 2026</div>
+  </div>
+</footer>
+
+<script src="viz.js"></script>
+</body>
+</html>

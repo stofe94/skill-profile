@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>arTIco · Felix Stocker</title>
+<meta name="description" content="arTIco: a framework for classifying multichannel time series from the research project arTIco, developed at IDIADA with Technische Hochschule Ingolstadt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <a class="back" href="index.html#open-source">← Skill profile</a>
+    <div class="kinds"><span class="kind os">Research project · IDIADA &amp; THI</span><span class="kind">Open source · MIT</span><span class="kind">v1.0 · 2024</span></div>
+    <h1 class="page-title">arTIco</h1>
+    <p class="lede">A framework for classifying multichannel time series, developed in the research project arTIco (Artificial Intelligence and Correlations).</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">View on GitHub ↗</a>
+      <a class="btn ghost" href="https://github.com/frapla/arTIco" target="_blank" rel="noopener">Original repository ↗</a>
+    </div>
+    <figure class="page-fig">
+      <canvas class="viz viz-signals" data-viz="signals" role="img" aria-label="Schematic: three channels each show a simulated signal next to the test signal, and a model assigns each channel a rating from excellent to poor"></canvas>
+      <figcaption>Schematic of the idea: for each channel the simulated signal (blue) is compared with the test signal (dashed), and the model assigns a rating the way an experienced engineer would. An illustration, not project data.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <div class="doc-main">
+
+    <section>
+      <h2>The research project</h2>
+      <p>arTIco started in January 2022 as a two-year research project on validating digital twins with artificial intelligence. In vehicle safety, virtual models are usually checked against a few sensors and fixed tolerance corridors, which captures the real physics only partly.</p>
+      <p>The project's idea: preserve the knowledge of experienced engineers and combine it with machine learning, so that the quality of a virtual model can be judged more broadly and more objectively. The application example was crash test dummy models in passive vehicle safety. The long-term aim is more confidence in crash simulations, so they can replace more of the expensive hardware tests.</p>
+      <p>arTIco was funded by the Free State of Bavaria in the Bavarian Cooperative Research Programme (BayVFP), funding line Digitalization.</p>
+    </section>
+
+    <section>
+      <h2>My part</h2>
+      <p>I worked on arTIco at IDIADA together with Franz Plaschkies from Technische Hochschule Ingolstadt and my IDIADA colleague Zhengxuan Yuan. The framework is one of the first complete tools I was able to publish after switching into data science, and it was my entry into more demanding data science problems around crash simulation and CAE.</p>
+    </section>
+
+    <section>
+      <h2>What the framework does</h2>
+      <ul>
+        <li><strong>One standard pipeline.</strong> Load the data, train, evaluate. Each run is controlled by a single parameter file.</li>
+        <li><strong>Several time-series models.</strong> Convolutional and recurrent networks for time series (1D-CNN, LSTM-FCN, InceptionTime) behind a common interface. New models go into one folder.</li>
+        <li><strong>Automatic tuning.</strong> Hyperparameter search with Optuna.</li>
+        <li><strong>Solid evaluation.</strong> Stratified cross-validation with confidence intervals and metrics that stay fair when classes are unbalanced.</li>
+        <li><strong>Reproducible experiments.</strong> Every run stores its parameters, results, trained pipeline and log.</li>
+      </ul>
+      <p>The public version works with generated dummy data in the same format as the project data: simulation signals, expert ratings and objective ratings according to ISO&nbsp;18571.</p>
+    </section>
+
+    <section>
+      <h2>Citation</h2>
+      <div class="cite">Plaschkies, F., Stocker, F., Yuan, Z. (2024). arTIco Framework (Version 1.0). https://github.com/frapla/arTIco</div>
+    </section>
+
+  </div>
+
+  <aside class="aside" aria-label="Project facts">
+    <dl>
+      <div><dt>Type</dt><dd>Publicly funded research project, open source</dd></div>
+      <div><dt>Partners</dt><dd>IDIADA Fahrzeugtechnik GmbH, Technische Hochschule Ingolstadt</dd></div>
+      <div><dt>Authors</dt><dd>F. Plaschkies, F. Stocker, Z. Yuan</dd></div>
+      <div><dt>Project start</dt><dd>January 2022, two years</dd></div>
+      <div><dt>Release</dt><dd>v1.0, June 2024</dd></div>
+      <div><dt>License</dt><dd>MIT</dd></div>
+      <div><dt>Stack</dt><dd>Python, Keras, Optuna</dd></div>
+    </dl>
+    <div class="links">
+      <a href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">github.com/stofe94/arTIco ↗</a>
+      <a href="https://zenodo.org/records/11656662" target="_blank" rel="noopener">Project workshop summary (Zenodo) ↗</a>
+    </div>
+  </aside>
+</main>
+
+<div class="more">
+  <div class="wrap">
+    <span class="lbl">More open-source projects</span>
+    <a class="btn ghost" href="crashdefnet.html">CrashDefNet →</a>
+    <a class="btn ghost" href="cbr-rd-agent.html">CBR-augmented R&amp;D-Agent →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Germany</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Skill profile · updated October 2026</div>
+  </div>
+</footer>
+
+<script src="viz.js"></script>
+</body>
+</html>
