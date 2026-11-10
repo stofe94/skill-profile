@@ -270,6 +270,70 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
 .cbr-count{font-family:var(--f-mono);font-size:14px;fill:var(--muted)}
 .cbr-in{font-family:var(--f-display);font-weight:600;font-size:18px;fill:var(--ink)}
 
+/* 3D crash scene (crash3d.js) */
+.viz-3d{position:relative;width:100%;aspect-ratio:16/8;min-height:280px;border-radius:10px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 38%,var(--surface) 0%,var(--surface-2) 70%)}
+.feature-fig .viz-3d{aspect-ratio:16/11;min-height:260px}
+.viz-3d.is-fallback{background:none;aspect-ratio:auto;min-height:0}
+.c3-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y;transition:opacity .2s}
+.c3-dragging .c3-canvas{cursor:grabbing}
+.c3-hud{position:absolute;left:14px;top:12px;display:flex;flex-direction:column;gap:6px;pointer-events:none;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.c3-row{display:flex;gap:10px;align-items:baseline}
+.c3-lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+.c3-step{font-family:var(--f-display);font-weight:600;font-size:17px;color:var(--ink);font-variant-numeric:tabular-nums}
+.c3-sub{gap:14px;font-size:11px;font-variant-numeric:tabular-nums}
+.c3-con{color:var(--hot)}
+.c3-ticks{display:flex;gap:3px}
+.c3-ticks i{display:block;width:14px;height:4px;border-radius:2px;background:var(--line-strong);transition:background .25s}
+.c3-ticks i.on{background:var(--cool)}
+.c3-ticks i.live{background:var(--hot)}
+.c3-legend{position:absolute;right:14px;bottom:12px;display:flex;align-items:center;gap:8px;pointer-events:none;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.c3-bar{width:84px;height:6px;border-radius:3px;background:var(--grad)}
+.c3-key{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.c3-key i{display:block;width:16px;height:2px;background:var(--hot);border-radius:1px}
+.c3-hint{position:absolute;left:14px;bottom:12px;pointer-events:none;font-family:var(--f-mono);font-size:10.5px;color:var(--muted-2);transition:opacity .4s}
+.c3-used .c3-hint{opacity:0}
+.c3-compact .c3-hud{left:10px;top:8px}
+.c3-compact .c3-ticks i{width:9px}
+.c3-compact .c3-legend{right:10px;bottom:8px}
+.c3-compact .c3-key,.c3-compact .c3-hint{display:none}
+.c3-compact .c3-pole{display:none}
+
+/* overview strip, architecture comparison, try-it cards and results */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.kpi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi b{font-family:var(--f-display);font-weight:600;font-size:26px;letter-spacing:-.01em;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.arch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.arch-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.arch-card h3{font-family:var(--f-display);font-weight:600;font-size:16.5px;line-height:1.25}
+.arch-card h3 small{display:block;font-family:var(--f-mono);font-weight:400;font-size:11px;color:var(--muted-2);letter-spacing:.02em;margin-top:2px}
+.arch-card p{font-size:13.5px;color:var(--text)}
+.blocks{display:flex;align-items:stretch;gap:4px;font-family:var(--f-mono);font-size:10.5px;line-height:1.25}
+.blocks span{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 4px;border-radius:7px;border:1px solid var(--line-strong);color:var(--ink);background:var(--surface-2)}
+.blocks .mp{background:var(--cool-soft);border-color:transparent;color:var(--cool)}
+.blocks .tf{background:var(--hot-soft);border-color:transparent;color:var(--hot)}
+.blocks .wide{flex-grow:3}
+.arch-facts{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.arch-facts b{color:var(--ink);font-weight:600}
+.tryit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.try{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s;min-width:0}
+.try:hover{border-color:var(--cool);transform:translateY(-1px)}
+.try b{font-family:var(--f-display);font-weight:600;font-size:15.5px;color:var(--ink)}
+.try span{font-size:13px;color:var(--muted)}
+.try em{font-style:normal;font-family:var(--f-mono);font-size:11.5px;color:var(--cool);margin-top:auto;padding-top:6px}
+.result{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.result h3{font-family:var(--f-display);font-weight:600;font-size:17px;line-height:1.25}
+.result h3 small{display:block;font-family:var(--f-body);font-weight:400;font-size:13px;color:var(--muted);margin-top:3px}
+.result .tbl{border-radius:10px}
+.result .tbl table{min-width:420px}
+.result p{font-size:14px}
+.result .doc-link{font-family:var(--f-mono);font-size:12px}
+.doc-main .result ul{gap:7px}
+.doc-main .result li{font-size:14px}
+.result .doc-link a{color:var(--cool);text-decoration:none}
+.result .doc-link a:hover{text-decoration:underline}
+
 /* workflow strip on project pages */
 .doc-main ol.flow{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;max-width:none}
 .doc-main .flow li{position:relative;padding:12px 12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--muted)}
@@ -296,6 +360,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
   .stat:nth-child(2n){border-right:none}
   .stat:last-child{grid-column:1/-1}
   .note{grid-template-columns:minmax(0,1fr)}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .arch,.tryit{grid-template-columns:minmax(0,1fr)}
+  .viz-3d{aspect-ratio:4/3}
   .doc-main ol.flow{grid-template-columns:minmax(0,1fr);gap:16px}
   .doc-main .flow li:not(:last-child)::after{content:"↓";right:auto;left:18px;top:auto;bottom:-17px;transform:none}
 }

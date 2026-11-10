@@ -306,6 +306,9 @@
     run();
   }
 
+  /* the 3D crash scene (crash3d.js) falls back to the 2D plate without WebGL */
+  window.SkillViz = { plate: plate };
+
   function boot() {
     Array.prototype.forEach.call(document.querySelectorAll('canvas[data-viz="plate"]'), plate);
     Array.prototype.forEach.call(document.querySelectorAll('canvas[data-viz="signals"]'), signals);

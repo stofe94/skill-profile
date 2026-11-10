@@ -123,21 +123,22 @@
       <div class="card-body">
         <div class="card-top">
           <span class="pid os">CDN</span>
-          <div class="kinds"><span class="kind os">Private project</span><span class="kind">Open source · Apache-2.0</span></div>
+          <div class="kinds"><span class="kind os">Private project</span><span class="kind">Open source · AGPL-3.0</span></div>
         </div>
         <h3>CrashDefNet</h3>
-        <p class="sub">Learned deformation prediction for crash simulations</p>
+        <p class="sub">Graph neural network surrogates for crash simulation</p>
         <p>My most extensive private project, built from scratch and informed by my experience with deep learning for crash simulation. CrashDefNet learns from finite element simulations and predicts, step by step on the simulation mesh, how a structure deforms and which stress it carries.</p>
-        <p>It covers the full workflow from raw simulation data to validated predictions, and stays lean enough that new model architectures can be added and compared quickly. The goal: a simple, flexible base for testing new models, shared with the community.</p>
-        <div class="facts"><span>2026</span><span>MeshGraphNets &amp; MGN-Transformer</span><span>PyTorch Geometric</span></div>
+        <p>It covers the complete workflow from raw simulation data to evaluation against published results, and is verified on a first real crash case: a bumper beam hitting a pole, predicted over the whole impact. It stays lean enough that new architectures can be added and compared quickly: a simple, flexible base for testing new models, shared with the community.</p>
+        <div class="facts"><span>2026</span><span>MeshGraphNets &amp; MGN-Transformer</span><span>OpenRadioss &amp; LS-DYNA data</span><span>Docs &amp; Colab</span></div>
         <div class="actions">
           <a class="btn" href="crashdefnet.html">Project page →</a>
           <a class="btn ghost" href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn ghost" href="https://stofe94.github.io/crash-def-net/" target="_blank" rel="noopener">Docs ↗</a>
         </div>
       </div>
       <figure class="feature-fig">
-        <canvas class="viz viz-plate" data-viz="plate" role="img" aria-label="Schematic: a plate mesh drawn as a graph is pressed by an impactor and deforms step by step"></canvas>
-        <figcaption>Schematic: the model predicts the deformation of the mesh step by step.</figcaption>
+        <div class="viz viz-3d" data-viz="crash3d" role="img" aria-label="3D schematic: a bumper beam hits a rigid pole and deforms step by step, with contact edges where they touch"></div>
+        <figcaption>Schematic: a bumper beam hits a pole. The model predicts the deformation step by step, with contact rebuilt at every step.</figcaption>
       </figure>
     </article>
 
@@ -311,7 +312,7 @@
       <div class="pub">
         <span class="lbl">Software releases</span>
         <span class="pub-title">CrashDefNet (2026) · arTIco Framework (2024)</span>
-        <span class="pub-where"><a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">crash-def-net ↗</a> · <a href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">arTIco ↗</a>, with F. Plaschkies and Z. Yuan</span>
+        <span class="pub-where"><a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">crash-def-net ↗</a> (<a href="https://doi.org/10.5281/zenodo.23575635" target="_blank" rel="noopener">DOI ↗</a>) · <a href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">arTIco ↗</a>, with F. Plaschkies and Z. Yuan</span>
       </div>
     </div>
   </div>
@@ -390,7 +391,7 @@
       <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
       <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
     </div>
-    <div class="foot-note">Skill profile · updated October 2026</div>
+    <div class="foot-note">Skill profile · updated November 2026</div>
   </div>
 </footer>
 
@@ -461,5 +462,6 @@
 })();
 </script>
 <script src="viz.js"></script>
+<script src="crash3d.js"></script>
 </body>
 </html>
