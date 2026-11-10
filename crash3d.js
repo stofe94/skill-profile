@@ -38,7 +38,7 @@
     var LB = 1.30, HB = 0.10, DB = 0.07;          // beam length, height, depth
     var XBOX = 0.42, ABOX = 0.08, LBOX = 0.17;    // crash box position, section, length
     var R = 0.127, POLE_Y0 = -0.24, POLE_Y1 = 0.30; // pole radius (254 mm diameter)
-    var GAP0 = 0.09, DMAX = 0.21, RW = 0.034, EPS = 0.007, DMIN = 0.018;
+    var GAP0 = 0.09, DMAX = 0.24, RW = 0.034, EPS = 0.007, DMIN = 0.018;
     function zc(x) { var u = x / (LB / 2); return -0.10 * u * u; }
 
     /* ---------- colour ---------- */
@@ -106,23 +106,40 @@
     var st = { xp: 0.12, zp: 0, dmax: DMAX, S: 0, kL: 0, kR: 0, wb: 0, scale: 1 };
     function newCycle(first) {
       var r = first ? 0.62 : Math.random();
-      st.xp = (r - 0.5) * 0.84;                         // pole across the beam, about -420..+420 mm
+      st.xp = (r - 0.5) * 0.54;                         // pole between the crash boxes, -270..+270 mm
       st.dmax = DMAX * (0.88 + (first ? 0.6 : Math.random()) * 0.24);
       st.zp = zc(st.xp) + DB / 2 + R + GAP0;
     }
 
-    /* intrusion beyond first contact A -> crash box crush and beam bending */
+    /* Intrusion beyond first contact A is shared by the whole structure: the crash boxes crush,
+       the beam bends between them and only a small rest is local crush at the pole. */
     function setLoad(A) {
       var t = (st.xp + XBOX) / (2 * XBOX);
-      st.kL = A * 0.30 * (1 - 0.7 * (t - 0.5));
-      st.kR = A * 0.30 * (1 + 0.7 * (t - 0.5));
-      st.wb = A * 0.46;
+      var kL = 1 - 0.5 * (t - 0.5), kR = 1 + 0.5 * (t - 0.5);   // the nearer crash box crushes more
+      var f = A * 0.30 / (kL + (kR - kL) * t);                   // 30 % of A under the pole
+      st.kL = kL * f; st.kR = kR * f;
+      st.wb = A * 0.62;                                          // 62 % bending, ~8 % local crush
     }
     function kOf(x) { var t = (x + XBOX) / (2 * XBOX); return st.kL + (st.kR - st.kL) * t; }
-    function wOf(x) {
-      var d = x - st.xp;
-      return st.wb * (0.55 * Math.exp(-(d * d) / 0.040) + 0.45 * Math.exp(-(d * d) / 0.25));
+    // Bending as a plastic hinge mechanism: a rounded hinge at the pole, both halves of the beam
+    // rotate about the crash boxes and the ends beyond them swing towards the pole; a broad bow
+    // adds curvature along the whole beam. Normalized to 1 under the pole.
+    var HINGE = 0.07, OVER = LB / 2 - XBOX;
+    function sabs(d) { var a = Math.abs(d); return a >= HINGE ? a : d * d / (2 * HINGE) + HINGE / 2; }
+    function vee(x) {                                  // 1 at the pole, 0 at the crash boxes
+      var d = x - st.xp, L = d < 0 ? st.xp + XBOX : XBOX - st.xp;
+      return (1 - sabs(d) / L) / (1 - HINGE / (2 * L));
     }
+    function wShape(x) {
+      var s = vee(x), over = Math.abs(x) - XBOX;
+      if (over > 0) {                                  // ends: keep the slope, then ease off
+        var g = Math.min(1, over / OVER);
+        s = Math.max(-0.6, s * (1 - 0.5 * g * g * (3 - 2 * g)));
+      }
+      var d = x - st.xp;
+      return 0.8 * s + 0.2 * Math.exp(-(d * d) / 0.245);
+    }
+    function wOf(x) { return st.wb * wShape(x); }
 
     /* beam section at x: back point B and (projected) front point F in the xz plane */
     var tmpB = [0, 0], tmpF = [0, 0], crush = 0;
@@ -154,11 +171,11 @@
       var xa = p.xb + p.ox;
       section(xa);
       var zAtt = tmpB[1];
-      var zMount = zc(p.xb) - DB / 2 - LBOX + st.S;
-      var eps = Math.max(0, Math.min(0.74, 1 - (zAtt - zMount) / LBOX));
-      var xi0 = Math.max(0, 1 - eps / 0.75), z;
-      if (p.xi <= xi0) z = zMount + LBOX * p.xi;
-      else z = zMount + LBOX * xi0 + 0.25 * LBOX * (p.xi - xi0);
+      var zMount = zc(p.xb) - DB / 2 - LBOX + st.S, len = zAtt - zMount;
+      var eps = Math.max(0, Math.min(0.74, 1 - len / LBOX));
+      // progressive folding from the beam end; scaled so the box always meets the beam exactly
+      var xi0 = Math.max(0, 1 - eps / 0.75);
+      var z = zMount + len * (Math.min(p.xi, xi0) + 0.25 * Math.max(0, p.xi - xi0)) / (xi0 + 0.25 * (1 - xi0));
       var fold = 0;
       if (p.xi > xi0 && xi0 < 1) {
         var ph = (p.xi - xi0) * LBOX / 0.03 * Math.PI;
@@ -205,6 +222,12 @@
     canvas.className = 'c3-canvas';
     canvas.setAttribute('aria-hidden', 'true');
     host.appendChild(canvas);
+    // Essential layout inline: with a stale or missing style.css the canvas would otherwise set the
+    // height of its own host, and every resize would grow it by the device pixel ratio.
+    canvas.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;display:block';
+    if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+    host.style.overflow = 'hidden';
+    if (!host.clientHeight) host.style.aspectRatio = '16 / 8';
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
     renderer.setClearColor(0x000000, 0);
     var scene = new THREE.Scene();
