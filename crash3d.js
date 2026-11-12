@@ -2,9 +2,13 @@
    A bumper beam with two crash boxes hits a rigid pole. Every rollout step predicts the next
    state from the current one; contact edges (orange) are rebuilt from the predicted geometry.
    The deformation is an analytic illustration, not a model result.
-   Needs WebGL and three.js (loaded on demand); otherwise falls back to the 2D plate in viz.js. */
+   Needs WebGL and three.js (self-hosted in vendor/, loaded on demand); otherwise falls back to the 2D plate in viz.js. */
 (function () {
-  var THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js';
+  var THREE_URL = './vendor/three.module.min.js';
+  /* German pages (de/, <html lang="de">) get German labels */
+  var T = /^de\b/i.test(document.documentElement.lang || '')
+    ? { step: 'Rollout-Schritt', con: 'Kontaktkanten ', pole: 'Pfahl bei ', strain: 'Dehnung', high: 'hoch', edge: 'Kontaktkante', hint: 'zum Drehen ziehen' }
+    : { step: 'rollout step', con: 'contact edges ', pole: 'pole at ', strain: 'strain', high: 'high', edge: 'contact edge', hint: 'drag to rotate' };
   var hosts = document.querySelectorAll('[data-viz="crash3d"]');
   if (!hosts.length) return;
 
@@ -334,15 +338,15 @@
     /* ---------- HUD ---------- */
     var hud = document.createElement('div'); hud.className = 'c3-hud';
     hud.innerHTML =
-      '<div class="c3-row"><span class="c3-lbl">rollout step</span><span class="c3-step">0 / ' + STEPS + '</span></div>' +
+      '<div class="c3-row"><span class="c3-lbl">' + T.step + '</span><span class="c3-step">0 / ' + STEPS + '</span></div>' +
       '<div class="c3-ticks">' + new Array(STEPS + 1).join('<i></i>') + '</div>' +
-      '<div class="c3-row c3-sub"><span class="c3-con">contact edges 0</span><span class="c3-pole"></span></div>';
+      '<div class="c3-row c3-sub"><span class="c3-con">' + T.con + '0</span><span class="c3-pole"></span></div>';
     host.appendChild(hud);
     var legend = document.createElement('div'); legend.className = 'c3-legend';
-    legend.innerHTML = '<span class="c3-lbl">strain</span><span class="c3-bar"></span><span class="c3-lbl">high</span>' +
-      '<span class="c3-key"><i></i>contact edge</span>';
+    legend.innerHTML = '<span class="c3-lbl">' + T.strain + '</span><span class="c3-bar"></span><span class="c3-lbl">' + T.high + '</span>' +
+      '<span class="c3-key"><i></i>' + T.edge + '</span>';
     host.appendChild(legend);
-    var hint = document.createElement('div'); hint.className = 'c3-hint'; hint.textContent = 'drag to rotate';
+    var hint = document.createElement('div'); hint.className = 'c3-hint'; hint.textContent = T.hint;
     host.appendChild(hint);
     var elStep = hud.querySelector('.c3-step'), elCon = hud.querySelector('.c3-con'), elPole = hud.querySelector('.c3-pole');
     var ticks = hud.querySelectorAll('.c3-ticks i');
@@ -351,8 +355,8 @@
       var s = step + '|' + ncon + '|' + live;
       if (s === lastHud) return; lastHud = s;
       elStep.textContent = step + ' / ' + STEPS;
-      elCon.textContent = 'contact edges ' + ncon;
-      elPole.textContent = 'pole at ' + (st.xp >= 0 ? '+' : '−') + Math.round(Math.abs(st.xp) * 1000) + ' mm';
+      elCon.textContent = T.con + ncon;
+      elPole.textContent = T.pole + (st.xp >= 0 ? '+' : '−') + Math.round(Math.abs(st.xp) * 1000) + ' mm';
       for (var i = 0; i < ticks.length; i++) {
         ticks[i].className = i < step ? 'on' : (i === step && live ? 'live' : '');
       }

@@ -195,7 +195,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
 .foot-links{display:flex;flex-direction:column;gap:5px;font-family:var(--f-mono);font-size:12.5px}
 .foot-links a{color:var(--foot-fg);text-decoration:none}
 .foot-links a:hover{color:var(--foot-hi)}
-.foot-note{font-family:var(--f-mono);font-size:11px;color:var(--foot-dim);width:100%}
+.foot-note{font-family:var(--f-mono);font-size:11px;color:var(--foot-dim);width:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+.foot-legal{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot-legal a{color:var(--foot-fg);text-decoration:none}
+.foot-legal a:hover{color:var(--foot-hi)}
 
 /* ---------- project pages ---------- */
 .page-head{background:var(--surface);border-bottom:1px solid var(--line)}
@@ -233,6 +236,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
 .refs li{color:var(--muted)}
 .refs a,.doc-main p a{color:var(--cool);text-decoration:none;border-bottom:1px solid var(--cool-soft)}
 .refs a:hover,.doc-main p a:hover{border-color:var(--cool)}
+
+/* legal pages (impressum.html, privacy.html): one reading column, no sidebar */
+.doc.legal{grid-template-columns:minmax(0,1fr)}
+.legal address{font-style:normal;color:var(--text);line-height:1.7}
+.legal address a,.legal li a{color:var(--cool);text-decoration:none;border-bottom:1px solid var(--cool-soft)}
+.legal address a:hover,.legal li a:hover{border-color:var(--cool)}
 
 .aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:16px;min-width:0}
 .aside dl{display:flex;flex-direction:column;gap:12px}
@@ -344,6 +353,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
 .flow-n{font-family:var(--f-mono);font-size:11px;color:var(--muted-2)}
 .flow-note{font-size:13.5px}
 
+/* ---------- language switch (EN / DE) ---------- */
+.hero > .wrap,.page-head > .wrap{position:relative}
+.lang{position:absolute;top:24px;right:28px;z-index:3;display:flex;border:1px solid var(--line-strong);border-radius:100px;overflow:hidden;background:var(--surface);font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;line-height:1}
+.lang a,.lang span{display:block;padding:7px 11px;text-decoration:none;color:var(--muted)}
+.lang a:hover{color:var(--cool)}
+.lang .on{background:var(--ink);color:var(--surface)}
+
 /* ---------- responsive ---------- */
 @media (max-width:900px){
   .doc{grid-template-columns:minmax(0,1fr);gap:32px}
@@ -368,6 +384,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;
 }
 @media (max-width:520px){
   .wrap{padding-inline:18px}
+  .lang{right:18px}
   section{padding-block:52px}
   .card-body,.feature .card-body{padding:22px 20px}
   .comp{padding:22px 20px 18px}

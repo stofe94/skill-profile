@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Felix Stocker Kompetenzprofil</title>
+<meta name="description" content="Kompetenzprofil von Felix Stocker, Data Scientist mit Hintergrund in Maschinenbau und CAE.">
+<link rel="alternate" hreflang="en" href="https://stofe94.github.io/skill-profile/">
+<link rel="alternate" hreflang="de" href="https://stofe94.github.io/skill-profile/de/">
+<link rel="alternate" hreflang="x-default" href="https://stofe94.github.io/skill-profile/">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="lang" aria-label="Sprache / Language"><a href="../index.html" hreflang="en" lang="en" title="English version">EN</a><span class="on" aria-current="true">DE</span></nav>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Kompetenzprofil · Data Science</span>
+        <h1 class="hero-name">Felix<br>Stocker</h1>
+        <div class="hero-role">Data Scientist <span class="dot">·</span> Hintergrund in Maschinenbau&nbsp;&amp;&nbsp;CAE</div>
+        <p class="hero-thesis">Maschinenbauingenieur mit einem Master mit Schwerpunkt Simulation. Als <strong>Quereinsteiger</strong> bin ich in die Data Science gewechselt und habe mehr als vier Jahre bei IDIADA Machine Learning auf Crash- und Fahrzeugsicherheitsdaten angewendet. Als <strong>Data Scientist</strong> verbinde ich beide Seiten: das Verständnis eines Ingenieurs für Simulationen und Versuche und Deep-Learning-Modelle, die daraus lernen. Jede Kompetenz unten verweist auf die Projekte dahinter.</p>
+      </div>
+      <div class="hero-vis">
+        <svg id="mesh" viewBox="0 0 520 430" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Ein Finite-Elemente-Netz als Graph, das sich verformt und nach Dehnung eingefärbt ist">
+          <g id="edges"></g><g id="nodes"></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="statrow">
+    <div class="wrap">
+      <div class="stat"><div class="n">2022–26</div><div class="l">AI Data Scientist bei IDIADA</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Open-Source-Projekte</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">berufliche Projekte</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Publikationen</div></div>
+      <div class="stat"><div class="n">M.Sc.</div><div class="l">Maschinenbau · Simulation</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ SKILL AREAS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">01 — Profil</span><h2 class="sec-title">Kompetenzfelder</h2></div>
+      <p class="sec-note">Acht Felder, jedes durch Projekte auf dieser Seite belegt. Die Kürzel verlinken darauf: <span class="chip os">CDN</span> Open Source, <span class="chip">CSV</span> beruflich.</p>
+    </div>
+
+    <div class="comp-grid">
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">01</span><h3 class="comp-name">Graph Neural Networks auf Simulationsnetzen</h3></div>
+        <p class="comp-body">Deep Learning direkt auf Finite-Elemente-Netzen: Das Netz wird zum Graphen, und das Modell lernt, wie sich eine Struktur im Crash verformt. MeshGraphNets und der neuere MeshGraphNet-Transformer sind in meinem eigenen Open-Source-Tool implementiert.</p>
+        <div class="tags"><span class="tag">PyTorch Geometric</span><span class="tag">MeshGraphNets</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cdn">CDN</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">02</span><h3 class="comp-name">Deep Learning</h3></div>
+        <p class="comp-body">Praktische Erfahrung mit den wichtigsten Netzwerkfamilien (Convolutional, rekurrent und Attention-basiert) für Zeitreihen, Bilder und FE-Netze, dazu ein solides Verständnis der Grundlagen ihres Trainings.</p>
+        <div class="tags"><span class="tag">PyTorch</span><span class="tag">TensorFlow / Keras</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cdn">CDN</a><a class="chip os" href="#p-art">ART</a><a class="chip" href="#p-csv">CSV</a><a class="chip" href="#p-cpp">CPP</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">03</span><h3 class="comp-name">Klassisches ML &amp; Statistik</h3></div>
+        <p class="comp-body">Überwachtes Lernen, Hyperparameter-Tuning und sorgfältige Auswertung: Kreuzvalidierung, Konfidenzintervalle und statistische Tests, um zu prüfen, ob ein Ergebnis wirklich trägt.</p>
+        <div class="tags"><span class="tag">scikit-learn</span><span class="tag">Optuna</span><span class="tag">XGBoost</span><span class="tag">SciPy</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-art">ART</a><a class="chip os" href="#p-cbr">CBR</a><a class="chip" href="#p-csv">CSV</a><a class="chip" href="#p-cpp">CPP</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">04</span><h3 class="comp-name">Computer Vision</h3></div>
+        <p class="comp-body">Objekterkennung und Bildklassifikation, einschließlich der Datenarbeit drumherum: Bilddaten sammeln, automatisch labeln und bereinigen, bevor trainiert wird.</p>
+        <div class="tags"><span class="tag">YOLO</span><span class="tag">ResNet</span><span class="tag">OpenCV</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip" href="#p-img">IMG</a><a class="chip" href="#p-csv">CSV</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">05</span><h3 class="comp-name">LLMs &amp; Agenten</h3></div>
+        <p class="comp-body">Erweiterung eines Open-Source-Data-Science-Agenten um ein Gedächtnis für vergangene Experimente, mit Messung des Effekts. Dazu LLM-gestützte Automatisierung alltäglicher interner Abläufe.</p>
+        <div class="tags"><span class="tag">R&amp;D-Agent</span><span class="tag">Gemma</span><span class="tag">Case-based Reasoning</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cbr">CBR</a><a class="chip" href="#p-llm">LLM</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">06</span><h3 class="comp-name">Zeitreihen &amp; Simulationsdaten</h3></div>
+        <p class="comp-body">Ergebnisse von Crash-Simulationen und Sensorsignale aus Versuchen: bereinigen, aussagekräftige Signalmerkmale extrahieren und Modelle bauen, die sie klassifizieren oder vorhersagen.</p>
+        <div class="tags"><span class="tag">Zeitreihen</span><span class="tag">LS-DYNA</span><span class="tag">Signalverarbeitung</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cdn">CDN</a><a class="chip os" href="#p-art">ART</a><a class="chip" href="#p-csv">CSV</a><a class="chip" href="#p-cpp">CPP</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">07</span><h3 class="comp-name">MLOps &amp; Cloud</h3></div>
+        <p class="comp-body">Modelle vom Experiment zum laufenden Dienst bringen: Docker, GPU-Training, reproduzierbare Umgebungen und Serverless-Deployment auf AWS.</p>
+        <div class="tags"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">GPU-Training</span><span class="tag">Linux</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cdn">CDN</a><a class="chip os" href="#p-cbr">CBR</a><a class="chip" href="#p-img">IMG</a></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-top"><span class="comp-idx">08</span><h3 class="comp-name">Software Engineering &amp; Automatisierung</h3></div>
+        <p class="comp-body">Sauberer, gut strukturierter Python-Code, kleine Web-Apps für Kolleginnen und Kollegen, Browser-Automatisierung und Versionsverwaltung mit Git.</p>
+        <div class="tags"><span class="tag">Streamlit</span><span class="tag">Flask</span><span class="tag">Selenium</span><span class="tag">Git / GitHub</span></div>
+        <div class="evid"><span class="lbl">Projekte</span><a class="chip os" href="#p-cdn">CDN</a><a class="chip" href="#p-llm">LLM</a><a class="chip" href="#p-img">IMG</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN-SOURCE PROJECTS ============ -->
+<section id="open-source" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">02 — Open Source</span><h2 class="sec-title">Open-Source-Projekte</h2></div>
+      <p class="sec-note">Öffentlich auf GitHub. Jedes Projekt hat eine eigene Seite mit Hintergrund, aktuellem Stand und Grenzen.</p>
+    </div>
+
+    <article class="card feature" id="p-cdn">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="pid os">CDN</span>
+          <div class="kinds"><span class="kind os">Privates Projekt</span><span class="kind">Open Source · AGPL-3.0</span></div>
+        </div>
+        <h3>CrashDefNet</h3>
+        <p class="sub">Graph Neural Networks als Surrogatmodelle für die Crash-Simulation</p>
+        <p>Mein umfangreichstes privates Projekt, von Grund auf selbst entwickelt und geprägt von meiner Erfahrung mit Deep Learning für die Crash-Simulation. CrashDefNet lernt aus Finite-Elemente-Simulationen und sagt Schritt für Schritt auf dem Simulationsnetz voraus, wie sich eine Struktur verformt und welche Spannung sie trägt.</p>
+        <p>Es deckt den kompletten Ablauf von den Simulationsrohdaten bis zur Auswertung im Vergleich mit veröffentlichten Ergebnissen ab und ist an einem ersten echten Crashfall verifiziert: einem Stoßfängerquerträger, der auf einen Pfahl trifft, vorhergesagt über den gesamten Aufprall. Dabei bleibt es schlank genug, um neue Architekturen schnell einzubauen und zu vergleichen: eine einfache, flexible Basis zum Testen neuer Modelle, offen für die Community.</p>
+        <div class="facts"><span>2026</span><span>MeshGraphNets &amp; MGN-Transformer</span><span>Daten aus OpenRadioss &amp; LS-DYNA</span><span>Doku &amp; Colab</span></div>
+        <div class="actions">
+          <a class="btn" href="crashdefnet.html">Projektseite →</a>
+          <a class="btn ghost" href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn ghost" href="https://stofe94.github.io/crash-def-net/" target="_blank" rel="noopener">Doku ↗</a>
+        </div>
+      </div>
+      <figure class="feature-fig">
+        <div class="viz viz-3d" data-viz="crash3d" role="img" aria-label="3D-Schema: Ein Stoßfängerquerträger trifft auf einen starren Pfahl und verformt sich Schritt für Schritt, mit Kontaktkanten an den Berührstellen"></div>
+        <figcaption>Schema: Ein Stoßfängerquerträger trifft auf einen Pfahl. Das Modell sagt die Verformung Schritt für Schritt voraus und baut den Kontakt in jedem Schritt neu auf.</figcaption>
+      </figure>
+    </article>
+
+    <div class="os-pair">
+
+      <article class="card" id="p-art">
+        <div class="card-body">
+          <div class="card-top">
+            <span class="pid os">ART</span>
+            <div class="kinds"><span class="kind os">Forschungsprojekt · IDIADA &amp; THI</span><span class="kind">Open Source · MIT</span></div>
+          </div>
+          <h3>arTIco</h3>
+          <p class="sub">Framework zur Klassifikation mehrkanaliger Zeitreihen</p>
+          <p>Entwickelt bei IDIADA zusammen mit der Technischen Hochschule Ingolstadt, in einem öffentlich geförderten Forschungsprojekt zur Validierung digitaler Zwillinge mit KI. Eines der ersten vollständigen Tools, die ich als Quereinsteiger veröffentlicht habe, und mein Einstieg in anspruchsvollere Data-Science-Arbeit mit Crash- und CAE-Daten.</p>
+          <div class="facts"><span>2024</span><span>mit F. Plaschkies &amp; Z. Yuan</span></div>
+          <div class="actions">
+            <a class="btn" href="artico.html">Projektseite →</a>
+            <a class="btn ghost" href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="p-cbr">
+        <div class="card-body">
+          <div class="card-top">
+            <span class="pid os">CBR</span>
+            <div class="kinds"><span class="kind os">Privates Projekt</span><span class="kind warn">Frühes Stadium</span></div>
+          </div>
+          <h3>CBR-augmented R&amp;D-Agent</h3>
+          <p class="sub">Ein Data-Science-Agent mit Gedächtnis für vergangene Experimente</p>
+          <p>Erweitert Microsofts Open-Source-Projekt R&amp;D-Agent, damit eine neue Aufgabe auf dem aufbauen kann, was früher funktioniert hat. Entstanden als Projektarbeit eines Weiterbildungszertifikats in angewandter KI, mit einem Preprint auf arXiv. Ein erster Ansatz, getestet an zwei Kaggle-Wettbewerben und noch weit vom praktischen Einsatz entfernt.</p>
+          <div class="facts"><span>Preprint · 2026</span><span>Gemma 4 (31B)</span><span>MIT</span></div>
+          <div class="actions">
+            <a class="btn" href="cbr-rd-agent.html">Projektseite →</a>
+            <a class="btn ghost" href="https://github.com/stofe94/cbr-rd-agent" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROFESSIONAL PROJECTS ============ -->
+<section id="professional">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">03 — Beruflich</span><h2 class="sec-title">Berufliche Projekte</h2></div>
+      <p class="sec-note">Ausgewählte Arbeiten aus meiner Anstellung bei IDIADA und davor aus der angewandten Forschung.</p>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Zu diesen Projekten</span>
+      <p>Diese Projekte stammen aus meiner beruflichen Tätigkeit. Der Code ist nicht öffentlich, daher bleiben die Beschreibungen allgemein. Alle wurden für Forschungs- und Testzwecke entwickelt.</p>
+    </div>
+
+    <div class="pro-grid">
+
+      <article class="card pro" id="p-csv">
+        <div class="card-body">
+          <div class="card-top"><span class="pid">CSV</span><span class="kind pro">Beruflich · IDIADA</span></div>
+          <h3>Validierung von Crashtest-Signalen</h3>
+          <p class="sub">Automatische i.O./n.i.O.-Prüfung von Sensorsignalen aus Crashtests</p>
+          <p>Ein neuronales Netz, das fehlerhafte Sensorsignale aus Crashtests erkennt. Es kombiniert ein Bildmodell des Signalverlaufs mit berechneten Signalmerkmalen wie Spitzenwerten, Energie und Frequenzinhalt. Ausgewertet mit stratifizierter Kreuzvalidierung und Konfidenzintervallen.</p>
+          <div class="tags"><span class="tag">PyTorch</span><span class="tag">ResNet</span><span class="tag">SciPy</span></div>
+        </div>
+      </article>
+
+      <article class="card pro" id="p-cpp">
+        <div class="card-body">
+          <div class="card-top"><span class="pid">CPP</span><span class="kind pro">Beruflich · IDIADA</span></div>
+          <h3>Crashpuls-Vorhersage</h3>
+          <p class="sub">Eine vollständige Beschleunigungskurve aus vier Szenarioparametern</p>
+          <p>Aus Aufprallposition, Aufprallwinkel und den Geschwindigkeiten beider Fahrzeuge sagt das Modell den kompletten zeitlichen Beschleunigungsverlauf voraus. Ich habe mehrere Netzwerktypen verglichen, von einfachen Baselines bis zu Convolutional- und rekurrenten Modellen, nachdem ich zuerst geprüft hatte, ob der Zusammenhang nichtlinear genug ist, um Deep Learning zu rechtfertigen.</p>
+          <div class="tags"><span class="tag">Keras</span><span class="tag">PyTorch</span><span class="tag">XGBoost</span></div>
+        </div>
+      </article>
+
+      <article class="card pro" id="p-img">
+        <div class="card-body">
+          <div class="card-top"><span class="pid">IMG</span><span class="kind pro">Beruflich · IDIADA</span></div>
+          <h3>Pipeline zur Objekterkennung</h3>
+          <p class="sub">Bilderkennung technischer Ausrüstung, von Anfang bis Ende</p>
+          <p>Eine vollständige Computer-Vision-Pipeline: Bilder sammeln, mit einem ersten Modell automatisch labeln, Beinahe-Duplikate entfernen, einen YOLO-Detektor lokal oder auf AWS SageMaker trainieren und ihn als Serverless-Prototyp auf AWS Lambda bereitstellen, mit einem kleinen Desktop- und Web-Frontend.</p>
+          <div class="tags"><span class="tag">YOLO</span><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Flask</span></div>
+        </div>
+      </article>
+
+      <article class="card pro" id="p-llm">
+        <div class="card-body">
+          <div class="card-top"><span class="pid">LLM</span><span class="kind pro">Beruflich · IDIADA</span></div>
+          <h3>LLM-Automatisierungs-Toolbox</h3>
+          <p class="sub">LLM-gestützte Analyse von Code und Folien, automatisiert</p>
+          <p>Eine kleine interne Streamlit-App, die Quellcode oder PowerPoint-Dateien aufbereitet, sie per Browser-Automatisierung an ein LLM übergibt und das Ergebnis als gut lesbaren HTML-Bericht zurückgibt. Klar in Schichten aufgebaut, mit grundlegenden Schutzmechanismen für Dateiverarbeitung und Zugriff.</p>
+          <div class="tags"><span class="tag">Streamlit</span><span class="tag">Selenium</span><span class="tag">Python</span></div>
+        </div>
+      </article>
+
+      <article class="card pro wide" id="p-lpbf">
+        <div class="card-body">
+          <div class="card-top"><span class="pid">LPBF</span><div class="kinds"><span class="kind pro">Forschung · TC Neustadt</span><span class="kind">Peer-Review · Materialia 2023</span></div></div>
+          <h3>Verzug 3D-gedruckter Metall-Stents</h3>
+          <p class="sub">Finite-Elemente-Simulation des Laserstrahlschmelzens (L-PBF)</p>
+          <p>Eine validierte thermomechanische Simulation 3D-gedruckter Stent-Gitterstrukturen. Sie zeigt, wie Strebenwinkel, Strebendicke und Übergangsradius den Verzug bestimmen und wie eine vorkompensierte Geometrie das gedruckte Bauteil nahe an seine Sollform bringt. Die ingenieurwissenschaftliche Basis, auf der meine Data-Science-Arbeit aufbaut.</p>
+          <div class="tags"><span class="tag">FEM</span><span class="tag">Thermomechanik</span><span class="tag">Additive Fertigung</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAREER ============ -->
+<section id="career" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">04 — Werdegang</span><h2 class="sec-title">Beruf &amp; Ausbildung</h2></div>
+      <p class="sec-note">Vom Maschinenbau mit Simulationsschwerpunkt zur angewandten KI.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item hot">
+        <div class="tl-date">Feb. 2022 — Juni 2026</div>
+        <div class="tl-role">AI Data Scientist · CAE</div>
+        <div class="tl-org">Applus+ IDIADA, Ingolstadt</div>
+        <div class="tl-desc">Machine Learning für Fahrzeugsicherheit und digitale Zwillinge: Crash-Simulations- und Versuchsdaten, Zeitreihen, Bilder und FE-Netze, Erklärbarkeit und Unsicherheit, Cloud-Deployment auf AWS. Im letzten Jahr mit Schwerpunkt auf Deep Learning für 3D-Geometrien.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2020 — 2022</div>
+        <div class="tl-role">Wissenschaftlicher Mitarbeiter</div>
+        <div class="tl-org">Technologie Campus Neustadt an der Donau</div>
+        <div class="tl-desc">Simulationsmethoden für die additive Fertigung: Thermomechanik, Multiskalen-Modellierung und FEM.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2018 — 2021</div>
+        <div class="tl-role">M.Sc. Maschinenbau</div>
+        <div class="tl-org">OTH Regensburg</div>
+        <div class="tl-desc">Modellbasierte Optimierung eines Stent-Designs mit Surrogatmodellen. Masterarbeit bei MTU Aero Engines zur Simulation des additiven Fertigungsprozesses.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2014 — 2018</div>
+        <div class="tl-role">B.Eng. Maschinenbau</div>
+        <div class="tl-org">OTH Regensburg</div>
+        <div class="tl-desc">CFD-Simulation der Aerodynamik mit OpenFOAM auf einem HPC-Cluster.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section id="publications">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">05 — Output</span><h2 class="sec-title">Publikationen &amp; Vorträge</h2></div>
+    </div>
+    <div class="pub-grid">
+      <div class="pub">
+        <span class="lbl">Preprint · 2026</span>
+        <span class="pub-title">Towards Persistent Case-Based Memory for Autonomous Data Science: A CBR-Augmented R&amp;D-Agent with a Locally Deployable Small Language Model</span>
+        <span class="pub-where">F. Stocker · <a href="https://arxiv.org/abs/2606.05250" target="_blank" rel="noopener">arXiv:2606.05250 ↗</a></span>
+      </div>
+      <div class="pub">
+        <span class="lbl">Fachzeitschrift mit Peer-Review · 2023</span>
+        <span class="pub-title">Geometric parameters in the distortion of L-PBF manufactured stents</span>
+        <span class="pub-where">Materialia, Elsevier</span>
+      </div>
+      <div class="pub">
+        <span class="lbl">Konferenzvortrag</span>
+        <span class="pub-title">KI-gestützte Validierung digitaler Zwillinge in der passiven Sicherheit</span>
+        <span class="pub-where">crash.tech · Technische Hochschule Ingolstadt</span>
+      </div>
+      <div class="pub">
+        <span class="lbl">Software-Releases</span>
+        <span class="pub-title">CrashDefNet (2026) · arTIco Framework (2024)</span>
+        <span class="pub-where"><a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">crash-def-net ↗</a> (<a href="https://doi.org/10.5281/zenodo.23575635" target="_blank" rel="noopener">DOI ↗</a>) · <a href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">arTIco ↗</a>, mit F. Plaschkies und Z. Yuan</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILL INDEX ============ -->
+<section id="index" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">06 — Auf einen Blick</span><h2 class="sec-title">Kompetenzindex</h2></div>
+      <p class="sec-note">Tools und Methoden, nach Themen gruppiert.</p>
+    </div>
+    <div class="kw-grid">
+
+      <div class="kw-cat"><h4>Sprachen &amp; Tools</h4><div class="kw-tags">
+        <span class="kw">Python</span><span class="kw">SQL</span><span class="kw">Bash</span><span class="kw">Git / GitHub</span><span class="kw">Linux</span><span class="kw">Docker</span><span class="kw">conda</span><span class="kw">LaTeX</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Deep-Learning-Frameworks</h4><div class="kw-tags">
+        <span class="kw">PyTorch</span><span class="kw">PyTorch Geometric</span><span class="kw">TensorFlow</span><span class="kw">Keras</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Modelltypen</h4><div class="kw-tags">
+        <span class="kw">Graph Neural Networks</span><span class="kw">MeshGraphNets</span><span class="kw">CNN</span><span class="kw">ResNet</span><span class="kw">LSTM</span><span class="kw">InceptionTime</span><span class="kw">Transformer / Attention</span><span class="kw">MLP</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Klassisches ML &amp; Statistik</h4><div class="kw-tags">
+        <span class="kw">scikit-learn</span><span class="kw">XGBoost</span><span class="kw">Random Forest</span><span class="kw">Optuna</span><span class="kw">Kreuzvalidierung</span><span class="kw">Statistische Tests</span><span class="kw">Konfidenzintervalle</span><span class="kw">PCA</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Computer Vision</h4><div class="kw-tags">
+        <span class="kw">YOLO</span><span class="kw">OpenCV</span><span class="kw">Objekterkennung</span><span class="kw">Bildklassifikation</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>LLMs &amp; Agenten</h4><div class="kw-tags">
+        <span class="kw">LLM-Integration</span><span class="kw">Agenten</span><span class="kw">Case-based Reasoning</span><span class="kw">Embeddings &amp; Retrieval</span><span class="kw">Prompt Engineering</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Datendomänen</h4><div class="kw-tags">
+        <span class="kw">Zeitreihen</span><span class="kw">Sensordaten</span><span class="kw">Crash-Simulation</span><span class="kw">LS-DYNA</span><span class="kw">FEM / Netzdaten</span><span class="kw">Signalverarbeitung</span><span class="kw">Digitale Zwillinge</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Big Data &amp; Datenbanken</h4><div class="kw-tags">
+        <span class="kw">PostgreSQL</span><span class="kw">MongoDB</span><span class="kw">Spark / PySpark</span><span class="kw">Hadoop</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>MLOps &amp; Cloud</h4><div class="kw-tags">
+        <span class="kw">AWS (SageMaker, Lambda, S3)</span><span class="kw">Docker</span><span class="kw">GPU-Training</span><span class="kw">Modell-Deployment</span><span class="kw">CI/CD</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Datenverarbeitung &amp; Visualisierung</h4><div class="kw-tags">
+        <span class="kw">pandas</span><span class="kw">NumPy</span><span class="kw">Matplotlib</span><span class="kw">Plotly</span><span class="kw">ParaView</span><span class="kw">TensorBoard</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Apps &amp; Automatisierung</h4><div class="kw-tags">
+        <span class="kw">Streamlit</span><span class="kw">Flask</span><span class="kw">Selenium</span><span class="kw">Pydantic</span>
+      </div></div>
+
+      <div class="kw-cat"><h4>Forschung &amp; Kommunikation</h4><div class="kw-tags">
+        <span class="kw">Explainable AI</span><span class="kw">Unsicherheit</span><span class="kw">Wissenschaftliches Schreiben</span><span class="kw">Peer Review</span><span class="kw">Konferenzvorträge</span>
+      </div></div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Deutschland</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Kompetenzprofil · Stand November 2026 <span class="foot-legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></div>
+  </div>
+</footer>
+
+<script src="../hero.js"></script>
+<script src="../viz.js"></script>
+<script src="../crash3d.js"></script>
+</body>
+</html>

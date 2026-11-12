@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CrashDefNet · Felix Stocker</title>
+<meta name="description" content="CrashDefNet: Graph Neural Networks als Surrogatmodelle für die Crash-Simulation. Ein schlankes PyTorch-Forschungsframework von den Simulationsrohdaten bis zur ausgewerteten Vorhersage, von Felix Stocker.">
+<link rel="alternate" hreflang="en" href="https://stofe94.github.io/skill-profile/crashdefnet.html">
+<link rel="alternate" hreflang="de" href="https://stofe94.github.io/skill-profile/de/crashdefnet.html">
+<link rel="alternate" hreflang="x-default" href="https://stofe94.github.io/skill-profile/crashdefnet.html">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <nav class="lang" aria-label="Sprache / Language"><a href="../crashdefnet.html" hreflang="en" lang="en" title="English version">EN</a><span class="on" aria-current="true">DE</span></nav>
+    <a class="back" href="index.html#open-source">← Kompetenzprofil</a>
+    <div class="kinds"><span class="kind os">Privates Projekt</span><span class="kind">Open Source · AGPL-3.0</span><span class="kind">2026</span></div>
+    <h1 class="page-title">CrashDefNet</h1>
+    <p class="lede">Graph Neural Networks als Surrogatmodelle für die Crash-Simulation. CrashDefNet lernt aus Finite-Elemente-Rechnungen und sagt Schritt für Schritt auf dem Simulationsnetz voraus, wie sich eine Struktur verformt. Ein vollständiges, schlankes PyTorch-Forschungsframework, von den Simulationsrohdaten bis zur Auswertung im Vergleich mit veröffentlichten Ergebnissen.</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">Auf GitHub ansehen ↗</a>
+      <a class="btn ghost" href="https://stofe94.github.io/crash-def-net/" target="_blank" rel="noopener">Dokumentation ↗</a>
+      <a class="btn ghost" href="https://colab.research.google.com/github/stofe94/crash-def-net/blob/main/examples/quick_start/crashdefnet-quickstart.ipynb" target="_blank" rel="noopener">In Colab ausprobieren ↗</a>
+    </div>
+    <figure class="page-fig">
+      <div class="viz viz-3d" data-viz="crash3d" role="img" aria-label="3D-Schema: Ein Stoßfängerquerträger mit zwei Crashboxen trifft auf einen starren Pfahl und verformt sich Schritt für Schritt. Wo Träger und Pfahl sich berühren, entstehen Kontaktkanten. Die Farbe zeigt die Dehnung."></div>
+      <figcaption>Schema eines autoregressiven Rollouts: Ein Stoßfängerquerträger trifft auf einen starren Pfahl, wie in dem Crashfall, an dem CrashDefNet ausgewertet wird. In jedem Schritt sagt das Modell den nächsten Zustand aus dem aktuellen voraus, und die Kontaktkanten (orange) werden aus der vorhergesagten Geometrie neu aufgebaut. Die Farbe zeigt die Dehnung. Eine Illustration, kein Modellergebnis.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <div class="doc-main">
+
+    <div class="kpis" aria-label="Eckdaten">
+      <div class="kpi"><b>2</b><span>Architekturen in einer Pipeline: MeshGraphNets und MGN-T</span></div>
+      <div class="kpi"><b>2</b><span>Datensätze: ein öffentlicher Benchmark und ein erster echter Crashfall</span></div>
+      <div class="kpi"><b>3</b><span>Rohdatenformate: TFRecord, d3plot (LS-DYNA, OpenRadioss), VTK</span></div>
+      <div class="kpi"><b>~5.600</b><span>Zeilen Python im Kern, durchgehend lesbar</span></div>
+    </div>
+
+    <section>
+      <h2>Was es macht</h2>
+      <p>CrashDefNet (Crash Deformation Network) ist ein Deep-Learning-Forschungswerkzeug zur Vorhersage struktureller Verformung: wie sich jeder Knoten des Simulationsnetzes bewegt und welche Spannung er trägt. Es behandelt das Finite-Elemente-Netz als Graphen und arbeitet <strong>autoregressiv</strong>: Das Modell sagt einen Zeitschritt aus dem aktuellen Zustand voraus, und jede Vorhersage wird zur Eingabe der nächsten, über den gesamten Lastfall.</p>
+      <p>Gelernte Modelle wie dieses sollen Ingenieurinnen und Ingenieuren Verformungsergebnisse deutlich schneller liefern als eine vollständige Crash-Simulation. CrashDefNet stellt den kompletten Ablauf rund um solche Modelle bereit und hält ihn schlank, damit neue Architekturen aus der Forschung schnell eingebunden und unter identischen Bedingungen verglichen werden können.</p>
+    </section>
+
+    <section>
+      <h2>Warum Schritt für Schritt</h2>
+      <p>Ein Crash ist ein Vorgang in der Zeit. Plastische Verformung ist bleibend, Falten bilden sich nacheinander, und Kontakte öffnen und schließen sich, wenn Bauteile aufeinandertreffen und sich wieder trennen. Ein expliziter Finite-Elemente-Solver verfolgt das in kleinen Zeitschritten, und die Vorhersage von CrashDefNet hat dieselbe Struktur.</p>
+      <p>Weil jeder Schritt von einer bekannten Geometrie ausgeht, <strong>wird der Kontakt in jedem Schritt neu gesucht</strong>: Eine Kante entsteht, wo sich zwei Körper nahekommen oder eine Struktur auf sich selbst faltet, und verschwindet, wenn sie sich trennen. Der Impaktor wirkt nur über diese Kontaktkanten auf die Struktur. Training, Modellauswahl und Metriken sind alle auf eine Aufgabe ausgerichtet: einen ganzen Lastfall allein auf Basis der eigenen Vorhersagen des Modells durchzurechnen.</p>
+    </section>
+
+    <section>
+      <h2>So funktioniert es</h2>
+      <ol class="flow">
+        <li><span class="flow-n">1</span><b>Rohdaten</b>FE-Rechnungen als TFRecord, d3plot oder VTK</li>
+        <li><span class="flow-n">2</span><b>Datensatz</b>Netz, Zustände und Statistiken in einer kompakten Datei</li>
+        <li class="hl"><span class="flow-n">3</span><b>Modell</b>sagt den nächsten Zeitschritt auf dem Graphen voraus</li>
+        <li><span class="flow-n">4</span><b>Rollout</b>eigene Vorhersagen zurückgeführt, Kontakt in jedem Schritt neu aufgebaut</li>
+        <li><span class="flow-n">5</span><b>Auswertung</b>Metriken wie in den Papers, Berichte, ParaView-Dateien</li>
+      </ol>
+      <p class="flow-note">Dateien auf der Festplatte verbinden die Stufen, sodass jede für sich ausgeführt und geprüft werden kann. Eine neue Architektur ersetzt Schritt 3 mit einer Datei und ein paar Zeilen Konfiguration. Daten, Training, Rollout und Metriken bleiben gleich, und so bleiben die Vergleiche fair.</p>
+    </section>
+
+    <section>
+      <h2>Zwei Architekturen, eine Pipeline</h2>
+      <p>Beide Modelle sehen denselben Graphen (Netzknoten, Netzkanten und Kontaktkanten) und sagen für jeden Knoten Geschwindigkeit und Spannung im nächsten Schritt voraus.</p>
+      <div class="arch">
+        <div class="arch-card">
+          <h3>MeshGraphNets<small>Pfaff et al., ICLR 2021</small></h3>
+          <div class="blocks" aria-label="Encoder, 15 Message-Passing-Schritte, Decoder"><span>Encoder</span><span class="mp wide">15 × Message Passing</span><span>Decoder</span></div>
+          <p>Die ursprüngliche Architektur für netzbasierte Simulation. Information wandert pro Message-Passing-Schritt eine Kante weiter, daher brauchen große Netze einen tiefen Stapel.</p>
+          <div class="arch-facts"><span><b>3,85 Mio.</b> Parameter</span><span><b>7 h 34 min</b> Training</span><span><b>~8 GB</b> GPU-Speicher</span></div>
+        </div>
+        <div class="arch-card">
+          <h3>MeshGraphNet-Transformer<small>Iparraguirre et al., 2026</small></h3>
+          <div class="blocks" aria-label="Encoder, 2 Message-Passing-Schritte, 2 Transformer-Blöcke, 2 Message-Passing-Schritte, Decoder"><span>Enc.</span><span class="mp">2 × MP</span><span class="tf">2 × Trans­former</span><span class="mp">2 × MP</span><span>Dec.</span></div>
+          <p>Ersetzt den Großteil des Message Passing durch Physics Attention über 16 Tokens, die Information mit linearem Aufwand über die gesamte Struktur austauscht. Nach dem Paper implementiert, jede Annahme dokumentiert.</p>
+          <div class="arch-facts"><span><b>0,51 Mio.</b> Parameter</span><span><b>2 h 54 min</b> Training</span><span><b>~2 GB</b> GPU-Speicher</span></div>
+        </div>
+      </div>
+      <p class="flow-note">Training auf dem Deforming-Plate-Benchmark, 60 Epochen auf einer NVIDIA RTX A4000, für beide mit denselben Daten, demselben Seed und demselben Rezept.</p>
+    </section>
+
+    <section>
+      <h2>Bisherige Ergebnisse</h2>
+      <p>Bewusst kleine Läufe auf einer GPU, dokumentiert mit Aufbau und Grenzen. Sie zeigen, dass die Kette durchgängig funktioniert und wie sich die Architekturen verhalten; eine wissenschaftliche Auswertung ist geplant und wird separat veröffentlicht.</p>
+
+      <div class="result">
+        <h3>Deforming Plate<small>Öffentlicher Benchmark von DeepMind: Ein Aktuator drückt in Platten unterschiedlicher Geometrie, ein vereinfachter Crashfall mit Kontakt und großer Verformung. 20 Testgeometrien, die im Training nicht vorkamen.</small></h3>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Modell</th><th>Parameter</th><th>Positionsfehler<br>gesamt · Median [mm]</th><th>Spannungsfehler<br>gesamt · Median [kPa]</th></tr></thead>
+            <tbody>
+              <tr><td>MGN-T</td><td>0,51 Mio.</td><td><span class="best">12,2</span> · 5,62</td><td>17,8 · 15,3</td></tr>
+              <tr><td>MeshGraphNets</td><td>3,85 Mio.</td><td>26,4 · <span class="best">4,64</span></td><td><span class="best">16,1</span> · <span class="best">11,0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Kein Gesamtsieger.</strong> MGN-T hält den Positionsfehler auf den am stärksten verformten Geometrien niedriger; MeshGraphNets ist auf den übrigen und bei der Spannung genauer.</li>
+          <li><strong>Deutlich günstiger.</strong> MGN-T braucht 7,5-mal weniger Parameter, 2,6-mal weniger Trainingszeit und etwa ein Viertel des GPU-Speichers.</li>
+          <li><strong>Keine Reproduktion der Papers.</strong> 100 Trainingstrajektorien und gröbere Zeitschritte, daher sind die Werte nicht direkt mit den veröffentlichten vergleichbar.</li>
+        </ul>
+        <div class="doc-link"><a href="https://stofe94.github.io/crash-def-net/results/deforming-plate/" target="_blank" rel="noopener">Vollständige Ergebnisse, Aufbau und Vergleich mit den Papers (englisch) ↗</a></div>
+      </div>
+
+      <div class="result">
+        <h3>Stoßfängerquerträger gegen Pfahl<small>Ein erster echter Crashfall: OpenRadioss-Rechnungen eines Stoßfängerquerträgers mit zwei Crashboxen, der mit 5 m/s auf einen starren Pfahl trifft, bei variierender Trägerdicke und Pfahlposition. 13.832 Knoten pro Rechnung, 7 Testrechnungen, die im Training nicht vorkamen.</small></h3>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>MGN-T, gesamter Aufprall</th><th>Alle Rechnungen</th><th>Median-Rechnung</th><th>Beste – schlechteste</th></tr></thead>
+            <tbody>
+              <tr><td>Positionsfehler [mm]</td><td class="best">6,19</td><td>6,25</td><td>3,87 – 7,29</td></tr>
+              <tr><td>Positionsfehler / Verschiebung [%]</td><td>10,0</td><td>9,78</td><td>6,75 – 12,8</td></tr>
+              <tr><td>Relativer Spannungsfehler [%]</td><td class="best">8,55</td><td>8,34</td><td>7,74 – 9,51</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Rechnet den gesamten Aufprall durch.</strong> Von 10 bis 100 ms allein auf Basis der eigenen Vorhersagen, mit Kontakt zum Pfahl und Selbstkontakt, die in jedem Schritt neu aufgebaut werden.</li>
+          <li><strong>Stabil über alle Testrechnungen.</strong> Der Positionsfehler bleibt bei etwa einem Zehntel der Verschiebung, der Spannungsfehler bei 8 bis 10 %, mit geringer Streuung.</li>
+          <li><strong>Frühes Stadium.</strong> Trainiert in 3 h 18 min auf einer RTX A4000. Die Verarbeitung von Crash-Solver-Daten befindet sich noch in einem frühen Entwicklungsstadium.</li>
+        </ul>
+        <div class="doc-link"><a href="https://stofe94.github.io/crash-def-net/results/bumper-beam/" target="_blank" rel="noopener">Vollständige Ergebnisse, Daten und Tutorial (englisch) ↗</a></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Ausprobieren</h2>
+      <div class="tryit">
+        <a class="try" href="https://colab.research.google.com/github/stofe94/crash-def-net/blob/main/examples/quick_start/crashdefnet-quickstart.ipynb" target="_blank" rel="noopener">
+          <b>In Google Colab</b>
+          <span>Ohne Installation. Export, Training und Rollout auf einer kostenlosen GPU, mit der Vorhersage als Animation, in unter 10 Minuten.</span>
+          <em>Notebook öffnen ↗</em>
+        </a>
+        <a class="try" href="https://stofe94.github.io/crash-def-net/getting-started/quick-start/" target="_blank" rel="noopener">
+          <b>In der App</b>
+          <span>Eine lokale Browser-Oberfläche, die ohne Befehle durch einen ersten Lauf führt. In einem frühen Stadium.</span>
+          <em>Schnellstart ↗</em>
+        </a>
+        <a class="try" href="https://stofe94.github.io/crash-def-net/" target="_blank" rel="noopener">
+          <b>Dokumentation</b>
+          <span>Installation, Tutorials, Anleitungen, Konzepte und eine aus dem Code generierte Referenz, auf Englisch.</span>
+          <em>stofe94.github.io/crash-def-net ↗</em>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Was enthalten ist</h2>
+      <ul>
+        <li><strong>Vollständiger Ablauf</strong> von den Simulationsrohdaten über Training und Rollout bis zur Auswertung im Vergleich mit veröffentlichten Ergebnissen.</li>
+        <li><strong>Physik im Graphen.</strong> Kontakt und Selbstkontakt werden nur dort verknüpft, wo sich Körper tatsächlich berühren, nicht zwischen Nachbarn innerhalb desselben Materials.</li>
+        <li><strong>Crash-Solver-Daten</strong> (frühes Stadium): LS-DYNA- und OpenRadioss-Rechnungen mit ihren Decks sowie VTK-Zeitreihen. Bauteile mit Kontaktregeln, Rechenparameter, Materialeigenschaften und freie Starrkörper gehen dort in den Graphen ein, wo sie wirken.</li>
+        <li><strong>Für große Datenmengen gebaut.</strong> Der Speicherbedarf bleibt unabhängig von der Datensatzgröße, bis zu einigen hundert GB; die Kontaktsuche schafft Netze mit 300.000 Knoten in etwa zwei Sekunden auf einer Desktop-CPU.</li>
+        <li><strong>Fairer Vergleich</strong> nach festem Protokoll: gleiche Daten, gleicher Seed, gleiches Budget und Rezept, nur das Modell ändert sich.</li>
+        <li><strong>Schlank, offen und lokal.</strong> Reines PyTorch und PyTorch Geometric, auf CPU oder GPU, mit Docker, unter Linux und Windows.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Hintergrund</h2>
+      <p>CrashDefNet baut auf meiner Erfahrung mit Deep Learning für die Crash-Simulation auf. Am Anfang stand eine praktische Frage: Was braucht es, um eine solche Pipeline selbst zu verändern und auszuprobieren? Die Forschung zur gelernten Crash-Simulation ist noch jung, daher zählt vor allem ein Framework, in dem sich Änderungen schnell und flexibel umsetzen lassen.</p>
+      <p>Ich habe es als privates Projekt von Grund auf entwickelt, dabei Schritt für Schritt die Bausteine zusammengetragen, die eine solche Pipeline braucht, und sie auf Methodik und Machbarkeit geprüft. Mitte 2026 habe ich entschieden, es fertigzustellen und mit der Community zu teilen. MGN-T, 2026 veröffentlicht, war die erste Architektur, die innerhalb der Pipeline vom Paper bis zum trainierten und ausgewerteten Modell umgesetzt wurde. Seit November 2026 steht die gesamte Kette von den Rohdaten bis zur ausgewerteten Vorhersage, veröffentlicht unter der AGPL-3.0 und archiviert auf Zenodo.</p>
+    </section>
+
+    <section>
+      <h2>Stand und Grenzen</h2>
+      <ul>
+        <li><strong>Forschungssoftware.</strong> Gedacht zum Testen auf Industriedaten durch Anwenderinnen und Anwender mit Fachwissen in Simulation und Machine Learning. Jede Anwendung braucht ihre eigene Verifikation; die Vorhersagen ergänzen Crash-Simulation und physische Versuche, statt sie zu ersetzen.</li>
+        <li><strong>Verifikation.</strong> Durchgängig am Deforming-Plate-Benchmark; die Kette ab OpenRadioss-Rechnungen am Stoßfängerquerträger. LS-DYNA-Rechnungen, VTK-Zeitreihen und die allgemeinen Datenstrukturen sind bisher an synthetischen und konvertierten Daten getestet.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Nächste Schritte</h2>
+      <ul>
+        <li>Weitere aktuelle Architekturen einbinden und testen, sobald sie veröffentlicht werden.</li>
+        <li>Komplexere Crashszenarien, mit allen Architekturen im direkten Vergleich.</li>
+        <li>Training auf dem vollständigen Deforming-Plate-Trainingssplit, wie in den Papers.</li>
+        <li>Verifikation an weiteren echten Crash-Datensätzen und Skalierung auf Gesamtfahrzeugnetze, sobald die Daten es erfordern.</li>
+        <li>Eine feinere Kontaktsuche und eine leistungsfähigere App.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Zitieren</h2>
+      <div class="cite">Stocker, F. (2026). CrashDefNet: Graph Neural Network Surrogates for Crash Simulation. https://doi.org/10.5281/zenodo.23575635</div>
+    </section>
+
+    <section>
+      <h2>Literatur</h2>
+      <ul class="refs">
+        <li>T. Pfaff, M. Fortunato, A. Sanchez-Gonzalez, P. W. Battaglia. Learning Mesh-Based Simulation with Graph Networks. ICLR 2021. <a href="https://arxiv.org/abs/2010.03409" target="_blank" rel="noopener">arXiv:2010.03409</a></li>
+        <li>M. M. Iparraguirre, I. Alfaro, D. González, E. Cueto. MeshGraphNet-Transformer: Scalable Mesh-Based Learned Simulation for Solid Mechanics. 2026. <a href="https://arxiv.org/abs/2601.23177" target="_blank" rel="noopener">arXiv:2601.23177</a></li>
+        <li>H. Wu, H. Luo, H. Wang, J. Wang, M. Long. Transolver: A Fast Transformer Solver for PDEs on General Geometries. ICML 2024. <a href="https://arxiv.org/abs/2402.02366" target="_blank" rel="noopener">arXiv:2402.02366</a></li>
+      </ul>
+    </section>
+
+  </div>
+
+  <aside class="aside" aria-label="Projektdaten">
+    <dl>
+      <div><dt>Typ</dt><dd>Privates Projekt, Open Source</dd></div>
+      <div><dt>Rolle</dt><dd>Alleiniger Entwickler</dd></div>
+      <div><dt>Stand</dt><dd>Vollständiger Ablauf, veröffentlicht im November 2026</dd></div>
+      <div><dt>Lizenz</dt><dd>AGPL-3.0 (frühere Releases Apache-2.0)</dd></div>
+      <div><dt>DOI</dt><dd><a href="https://doi.org/10.5281/zenodo.23575635" target="_blank" rel="noopener">10.5281/zenodo.23575635</a></dd></div>
+      <div><dt>Stack</dt><dd>Python, PyTorch, PyTorch Geometric, Docker, ParaView</dd></div>
+      <div><dt>Daten</dt><dd>TFRecord, d3plot aus LS-DYNA und OpenRadioss, VTK</dd></div>
+      <div><dt>Läuft auf</dt><dd>CPU oder GPU · Linux, Windows · Colab</dd></div>
+    </dl>
+    <div class="links">
+      <a href="https://github.com/stofe94/crash-def-net" target="_blank" rel="noopener">github.com/stofe94/crash-def-net ↗</a>
+      <a href="https://stofe94.github.io/crash-def-net/" target="_blank" rel="noopener">Dokumentation ↗</a>
+      <a href="https://colab.research.google.com/github/stofe94/crash-def-net/blob/main/examples/quick_start/crashdefnet-quickstart.ipynb" target="_blank" rel="noopener">Schnellstart in Colab ↗</a>
+      <a href="https://doi.org/10.5281/zenodo.23575635" target="_blank" rel="noopener">Zenodo-Archiv ↗</a>
+    </div>
+  </aside>
+</main>
+
+<div class="more">
+  <div class="wrap">
+    <span class="lbl">Weitere Open-Source-Projekte</span>
+    <a class="btn ghost" href="artico.html">arTIco →</a>
+    <a class="btn ghost" href="cbr-rd-agent.html">CBR-augmented R&amp;D-Agent →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Deutschland</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Kompetenzprofil · Stand November 2026 <span class="foot-legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></div>
+  </div>
+</footer>
+
+<script src="../viz.js"></script>
+<script src="../crash3d.js"></script>
+</body>
+</html>

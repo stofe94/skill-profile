@@ -1,6 +1,8 @@
 /* Schematic visuals for the skill profile. All drawings are illustrations, not model results. */
 (function () {
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  /* German pages (de/, <html lang="de">) get German labels in the drawings */
+  var DE = /^de\b/i.test(document.documentElement.lang || '');
 
   function lerp(a, b, t) { return a + (b - a) * t; }
   /* blue -> teal -> orange, the same scale as the hero mesh */
@@ -142,8 +144,8 @@
       // labels
       var fs = Math.max(10, Math.min(12, W / 60));
       ctx.font = '500 ' + fs + 'px ' + mono; ctx.fillStyle = muted; ctx.textBaseline = 'alphabetic';
-      ctx.textAlign = 'left'; ctx.fillText('rollout step ' + st.step + ' / ' + STEPS, mx - sw, H - 12);
-      ctx.textAlign = 'right'; ctx.fillText('schematic', mx + L + sw, H - 12);
+      ctx.textAlign = 'left'; ctx.fillText((DE ? 'Rollout-Schritt ' : 'rollout step ') + st.step + ' / ' + STEPS, mx - sw, H - 12);
+      ctx.textAlign = 'right'; ctx.fillText(DE ? 'schematisch' : 'schematic', mx + L + sw, H - 12);
     }
 
     calibrate();
@@ -163,7 +165,9 @@
      2. Signals: simulated vs. test channels, rated like an expert would
      --------------------------------------------------------------- */
   function signals(canvas) {
-    var N = 3, RATINGS = [['excellent', '--teal'], ['good', '--cool'], ['fair', '--hot'], ['poor', '--hot']];
+    var N = 3, RATINGS = DE
+      ? [['sehr gut', '--teal'], ['gut', '--cool'], ['mäßig', '--hot'], ['schlecht', '--hot']]
+      : [['excellent', '--teal'], ['good', '--cool'], ['fair', '--hot'], ['poor', '--hot']];
     var st = { t0: null, ch: [] };
     var s = surface(canvas, function () { if (reduce) draw(1, 1); });
     watchVisible(canvas, st);
@@ -199,7 +203,7 @@
         ctx.strokeStyle = lineC; ctx.lineWidth = 1; ctx.setLineDash([]);
         ctx.beginPath(); ctx.moveTo(x0, mid); ctx.lineTo(x1, mid); ctx.stroke();
         ctx.font = '500 ' + fs + 'px ' + mono; ctx.fillStyle = muted; ctx.textAlign = 'left';
-        ctx.fillText('channel ' + (c + 1), x0, y0 + fs + 4);
+        ctx.fillText((DE ? 'Kanal ' : 'channel ') + (c + 1), x0, y0 + fs + 4);
         var n = 160, upto = Math.round(n * prog);
         // test signal (reference), dashed
         ctx.strokeStyle = muted2; ctx.lineWidth = 1.4; ctx.setLineDash([4, 3]); ctx.beginPath();
@@ -213,7 +217,7 @@
         if (reveal > 0) {
           var r = rating(p.q), col = token(canvas, r[1], cool);
           ctx.globalAlpha = reveal;
-          ctx.font = '500 ' + (fs - 1) + 'px ' + mono; ctx.fillStyle = muted2; ctx.fillText('rating', x1 + 18, mid - 9);
+          ctx.font = '500 ' + (fs - 1) + 'px ' + mono; ctx.fillStyle = muted2; ctx.fillText(DE ? 'Bewertung' : 'rating', x1 + 18, mid - 9);
           ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x1 + 22, mid + 6, 4, 0, Math.PI * 2); ctx.fill();
           ctx.font = '600 ' + (fs + 2) + 'px ' + body; ctx.fillStyle = ink; ctx.fillText(r[0], x1 + 32, mid + 11);
           ctx.globalAlpha = 1;
@@ -268,7 +272,7 @@
       var a = deg * Math.PI / 180;
       tokenEl.setAttribute('cx', (cx + R * Math.cos(a)).toFixed(1)); tokenEl.setAttribute('cy', (cy + R * Math.sin(a)).toFixed(1));
     }
-    function label() { countEl.textContent = 'experiment ' + st.exp + ' · ' + st.cases.length + ' cases'; }
+    function label() { countEl.textContent = (DE ? 'Experiment ' : 'experiment ') + st.exp + ' · ' + st.cases.length + (DE ? ' Fälle' : ' cases'); }
 
     resetCases(); place(-90); label();
     if (reduce) { addCase(false); addCase(false); place(0); setOn('reuse', true); label(); return; }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>arTIco · Felix Stocker</title>
+<meta name="description" content="arTIco: ein Framework zur Klassifikation mehrkanaliger Zeitreihen aus dem Forschungsprojekt arTIco, entwickelt bei IDIADA mit der Technischen Hochschule Ingolstadt.">
+<link rel="alternate" hreflang="en" href="https://stofe94.github.io/skill-profile/artico.html">
+<link rel="alternate" hreflang="de" href="https://stofe94.github.io/skill-profile/de/artico.html">
+<link rel="alternate" hreflang="x-default" href="https://stofe94.github.io/skill-profile/artico.html">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <nav class="lang" aria-label="Sprache / Language"><a href="../artico.html" hreflang="en" lang="en" title="English version">EN</a><span class="on" aria-current="true">DE</span></nav>
+    <a class="back" href="index.html#open-source">← Kompetenzprofil</a>
+    <div class="kinds"><span class="kind os">Forschungsprojekt · IDIADA &amp; THI</span><span class="kind">Open Source · MIT</span><span class="kind">2024</span></div>
+    <h1 class="page-title">arTIco</h1>
+    <p class="lede">Ein Framework zur Klassifikation mehrkanaliger Zeitreihen, entwickelt im Forschungsprojekt arTIco (Artificial Intelligence and Correlations).</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">Auf GitHub ansehen ↗</a>
+      <a class="btn ghost" href="https://github.com/frapla/arTIco" target="_blank" rel="noopener">Ursprüngliches Repository ↗</a>
+    </div>
+    <figure class="page-fig">
+      <canvas class="viz viz-signals" data-viz="signals" role="img" aria-label="Schema: Drei Kanäle zeigen jeweils ein simuliertes Signal neben dem Versuchssignal, und ein Modell weist jedem Kanal eine Bewertung von sehr gut bis schlecht zu"></canvas>
+      <figcaption>Schema der Idee: Für jeden Kanal wird das simulierte Signal (blau) mit dem Versuchssignal (gestrichelt) verglichen, und das Modell vergibt eine Bewertung, so wie es erfahrene Ingenieurinnen und Ingenieure tun würden. Eine Illustration, keine Projektdaten.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap doc">
+  <div class="doc-main">
+
+    <section>
+      <h2>Das Forschungsprojekt</h2>
+      <p>arTIco startete im Januar 2022 als zweijähriges Forschungsprojekt zur Validierung digitaler Zwillinge mit künstlicher Intelligenz. In der Fahrzeugsicherheit werden virtuelle Modelle meist an wenigen Sensoren und festen Toleranzkorridoren geprüft, was die reale Physik nur teilweise erfasst.</p>
+      <p>Die Idee des Projekts: das Wissen erfahrener Ingenieurinnen und Ingenieure bewahren und mit Machine Learning verbinden, um die Qualität eines virtuellen Modells umfassender und objektiver beurteilen zu können. Anwendungsbeispiel waren Crashtest-Dummy-Modelle in der passiven Fahrzeugsicherheit. Langfristig soll das Vertrauen in Crash-Simulationen wachsen, damit sie mehr von den teuren Hardware-Versuchen ersetzen können.</p>
+      <p>arTIco wurde vom Freistaat Bayern im Bayerischen Verbundforschungsprogramm (BayVFP), Förderlinie Digitalisierung, gefördert.</p>
+    </section>
+
+    <section>
+      <h2>Mein Beitrag</h2>
+      <p>Ich habe bei IDIADA gemeinsam mit Franz Plaschkies von der Technischen Hochschule Ingolstadt und meinem IDIADA-Kollegen Zhengxuan Yuan an arTIco gearbeitet. Das Framework ist eines der ersten vollständigen Tools, die ich nach meinem Wechsel in die Data Science veröffentlichen konnte, und war mein Einstieg in anspruchsvollere Data-Science-Fragestellungen rund um Crash-Simulation und CAE.</p>
+    </section>
+
+    <section>
+      <h2>Was das Framework leistet</h2>
+      <ul>
+        <li><strong>Eine Standard-Pipeline.</strong> Daten laden, trainieren, auswerten. Jeder Lauf wird über eine einzige Parameterdatei gesteuert.</li>
+        <li><strong>Mehrere Zeitreihenmodelle.</strong> Convolutional- und rekurrente Netze für Zeitreihen (1D-CNN, LSTM-FCN, InceptionTime) hinter einer gemeinsamen Schnittstelle. Neue Modelle kommen in einen Ordner.</li>
+        <li><strong>Automatisches Tuning.</strong> Hyperparametersuche mit Optuna.</li>
+        <li><strong>Belastbare Auswertung.</strong> Stratifizierte Kreuzvalidierung mit Konfidenzintervallen und Metriken, die auch bei unausgewogenen Klassen fair bleiben.</li>
+        <li><strong>Reproduzierbare Experimente.</strong> Jeder Lauf speichert seine Parameter, Ergebnisse, die trainierte Pipeline und das Log.</li>
+      </ul>
+      <p>Die öffentliche Version arbeitet mit generierten Dummy-Daten im selben Format wie die Projektdaten: Simulationssignale, Expertenbewertungen und objektive Bewertungen nach ISO&nbsp;18571.</p>
+    </section>
+
+    <section>
+      <h2>Zitieren</h2>
+      <div class="cite">Plaschkies, F., Stocker, F., Yuan, Z. (2024). arTIco Framework. https://github.com/frapla/arTIco</div>
+    </section>
+
+  </div>
+
+  <aside class="aside" aria-label="Projektdaten">
+    <dl>
+      <div><dt>Typ</dt><dd>Öffentlich gefördertes Forschungsprojekt, Open Source</dd></div>
+      <div><dt>Partner</dt><dd>IDIADA Fahrzeugtechnik GmbH, Technische Hochschule Ingolstadt</dd></div>
+      <div><dt>Autoren</dt><dd>F. Plaschkies, F. Stocker, Z. Yuan</dd></div>
+      <div><dt>Projektstart</dt><dd>Januar 2022, Laufzeit zwei Jahre</dd></div>
+      <div><dt>Release</dt><dd>Juni 2024</dd></div>
+      <div><dt>Lizenz</dt><dd>MIT</dd></div>
+      <div><dt>Stack</dt><dd>Python, Keras, Optuna</dd></div>
+    </dl>
+    <div class="links">
+      <a href="https://github.com/stofe94/arTIco" target="_blank" rel="noopener">github.com/stofe94/arTIco ↗</a>
+      <a href="https://zenodo.org/records/11656662" target="_blank" rel="noopener">Zusammenfassung des Projektworkshops (Zenodo) ↗</a>
+    </div>
+  </aside>
+</main>
+
+<div class="more">
+  <div class="wrap">
+    <span class="lbl">Weitere Open-Source-Projekte</span>
+    <a class="btn ghost" href="crashdefnet.html">CrashDefNet →</a>
+    <a class="btn ghost" href="cbr-rd-agent.html">CBR-augmented R&amp;D-Agent →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-name">Felix Stocker</div>
+      <div class="foot-role">Data Scientist · Ingolstadt, Deutschland</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/felixstocker/" target="_blank" rel="noopener">linkedin.com/in/felixstocker ↗</a>
+      <a href="https://github.com/stofe94" target="_blank" rel="noopener">github.com/stofe94 ↗</a>
+    </div>
+    <div class="foot-note">Kompetenzprofil · Stand Oktober 2026 <span class="foot-legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></div>
+  </div>
+</footer>
+
+<script src="../viz.js"></script>
+</body>
+</html>
