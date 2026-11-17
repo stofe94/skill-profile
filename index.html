@@ -239,17 +239,48 @@
         </div>
       </article>
 
-      <article class="card pro wide" id="p-lpbf">
-        <div class="card-body">
-          <div class="card-top"><span class="pid">LPBF</span><div class="kinds"><span class="kind pro">Research · TC Neustadt</span><span class="kind">Peer-reviewed · Materialia 2023</span></div></div>
-          <h3>Distortion of 3D-printed metal stents</h3>
-          <p class="sub">Finite element simulation of laser powder bed fusion (L-PBF)</p>
-          <p>A validated thermo-mechanical simulation of 3D-printed stent lattices. It shows how strut angle, strut thickness and transition radius drive the distortion, and how pre-compensating the geometry brings the printed part close to its target shape. The engineering basis my data science work builds on.</p>
-          <div class="tags"><span class="tag">FEM</span><span class="tag">Thermo-mechanics</span><span class="tag">Additive manufacturing</span></div>
-        </div>
-      </article>
-
     </div>
+
+    <!-- process simulation: master's thesis → research project → paper -->
+    <div class="subsec" id="p-lpbf">
+      <div class="subsec-head">
+        <span class="eyebrow">Before data science</span>
+        <h3 class="subsec-title"><span class="pid">LPBF</span>Process simulation for metal 3D printing</h3>
+        <p class="subsec-lede">Before moving into data science, I worked on advanced process simulation: simulating the metal 3D printing process itself to predict how and why parts distort while they are built by laser powder bed fusion (L-PBF), and how to compensate for it. One topic, followed from my master's thesis to a peer-reviewed paper.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="card step">
+          <div class="card-body">
+            <div class="step-top"><span class="step-n">01</span><span class="step-ctx">Master's thesis · MTU&nbsp;Aero&nbsp;Engines&nbsp;AG</span></div>
+            <h4>Cylindrical structures: simulated, built, compensated</h4>
+            <p>Where it started: simulating how generic cylindrical metal structures distort in the L-PBF process, and which process-related effects cause it. I had the parts actually built and checked the simulation against the real results. I also developed a compensation method, then verified and evaluated it in detail on the printed parts. The thesis is confidential and not published.</p>
+          </div>
+        </li>
+        <li class="card step">
+          <div class="card-body">
+            <div class="step-top"><span class="step-n">02</span><span class="step-ctx">Research associate · TC Neustadt (OTH&nbsp;Regensburg)</span></div>
+            <h4>Aortic stents made by metal 3D printing</h4>
+            <p>I continued exactly this research in the publicly funded project Aortic Gen-i-Stent on patient-specific aortic stents made by metal 3D printing. The distortion effects from my thesis now had to be understood at the scale of fine stent lattices.</p>
+            <div class="actions"><a class="btn ghost" href="https://foerderportal.bund.de/foekat/jsp/SucheAction.do?actionMode=view&amp;fkz=13GW0391B" target="_blank" rel="noopener">Funding record ↗</a></div>
+          </div>
+        </li>
+        <li class="card step">
+          <div class="card-body">
+            <div class="step-top"><span class="step-n">03</span><span class="step-ctx">Peer-reviewed · Materialia 2023</span></div>
+            <h4>Geometry, size and manufacturability</h4>
+            <p>The resulting paper examines these distortion effects in detail for the geometries and sizes of aortic stents, and how well such stents can be manufactured with L-PBF. A validated thermo-mechanical simulation shows how strut angle, strut thickness and transition radius drive the distortion, and how pre-compensating the geometry brings the printed part close to its target shape.</p>
+            <div class="actions"><a class="btn ghost" href="https://doi.org/10.1016/j.mtla.2023.101774" target="_blank" rel="noopener">Paper (DOI) ↗</a></div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="subsec-foot">
+        <p>The engineering basis my data science work builds on.</p>
+        <div class="tags"><span class="tag">FEM</span><span class="tag">Thermo-mechanics</span><span class="tag">Additive manufacturing</span><span class="tag">L-PBF</span></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -270,14 +301,14 @@
       <div class="tl-item">
         <div class="tl-date">2020 — 2022</div>
         <div class="tl-role">Research associate</div>
-        <div class="tl-org">Technology Campus Neustadt an der Donau</div>
+        <div class="tl-org">Technology Campus Neustadt an der Donau, OTH Regensburg</div>
         <div class="tl-desc">Simulation methods for additive manufacturing: thermo-mechanics, multi-scale modelling and FEM.</div>
       </div>
       <div class="tl-item">
         <div class="tl-date">2018 — 2021</div>
         <div class="tl-role">M.Sc. Mechanical Engineering</div>
         <div class="tl-org">OTH Regensburg</div>
-        <div class="tl-desc">Model-based optimization of a stent design with surrogate models. Master's thesis at MTU Aero Engines on simulating the additive manufacturing process.</div>
+        <div class="tl-desc">Master's thesis at MTU Aero Engines AG on simulating the additive manufacturing process: distortion of 3D-printed metal parts and how to compensate for it.</div>
       </div>
       <div class="tl-item">
         <div class="tl-date">2014 — 2018</div>
@@ -303,13 +334,14 @@
       </div>
       <div class="pub">
         <span class="lbl">Peer-reviewed journal · 2023</span>
-        <span class="pub-title">Geometric parameters in the distortion of L-PBF manufactured stents</span>
-        <span class="pub-where">Materialia, Elsevier</span>
+        <span class="pub-title">Investigating the influence of geometric parameters on the deformation of laser powder bed fused stents using low-fidelity thermo-mechanical analysis</span>
+        <span class="pub-where">L. Wiesent, F. Stocker, A. Nonn · Materialia 28, 101774 (Elsevier) · <a href="https://doi.org/10.1016/j.mtla.2023.101774" target="_blank" rel="noopener">DOI ↗</a></span>
       </div>
       <div class="pub">
-        <span class="lbl">Conference talk</span>
-        <span class="pub-title">AI-supported validation of digital twins in passive safety</span>
-        <span class="pub-where">crash.tech · Technische Hochschule Ingolstadt</span>
+        <span class="lbl">Conference talk · 2022</span>
+        <span class="pub-title">Advanced methodology for correlating digital twins in passive vehicle safety</span>
+        <span class="pub-where">crash.tech · Technische Hochschule Ingolstadt · <a href="https://www.researchgate.net/publication/381902144_Advanced_methodology_for_correlating_digital_twins_in_passive_vehicle_safety" target="_blank" rel="noopener">ResearchGate ↗</a></span>
+        <span class="pub-note">The slides of this talk are not public. The same topic is covered in the public presentation from the <a href="https://www.researchgate.net/publication/381903694_arTIco_workshop" target="_blank" rel="noopener">arTIco workshop ↗</a></span>
       </div>
       <div class="pub">
         <span class="lbl">Software releases</span>
